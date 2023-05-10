@@ -45,9 +45,20 @@ router.get("/bookNow", (req, res) => {
     res.render("bookingForm")
 })
 
-router.post("/bookNow",ResController.addReservation,(req, res) => {
-    //8elei allagh se allh sel (stelnw to /bookNow apo to bookingForm sthn epomenh sel ->get sth sel)
-    res.redirect("/")})
+// router.post("/bookNow",ResController.addReservation,(req, res) => {//   
+//     res.redirect("/")})
+// router.post("/bookNow",(req, res) => {   
+//     console.log("data: ", req.body.check_in_date,req.body.check_out_date,req.body.guests_count) 
+//     res.render("selectRoom", {
+//         check_in_date: req.body.check_in_date,
+//         check_out_date: req.body.check_out_date,
+//         guests: req.body.guests_count
+//     })
+// })
+
+router.get("/doSelectRoom",ResController.createDB,ResController.availableRooms)
+
+// router.get("/selectRoom",ResController.availableRooms)
 
 
 export {router}

@@ -5,6 +5,7 @@
     "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
     "express.js": "^1.0.0",
+    "faker": "^5.5.3",
     "memorystore": "^1.6.7",
     "node.js": "^0.0.1-security",
     "pg": "^8.10.0",
@@ -24,5 +25,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/faker": "^6.6.9"
+  }
 }

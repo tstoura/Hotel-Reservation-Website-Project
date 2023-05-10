@@ -1,4 +1,4 @@
-<form action="/bookNow" method="post" class="myForm">
+<form action="/doSelectRoom" method="get" class="myForm">
     <div class="container">
         <div class="row mb-3">
             <div class="col">
@@ -9,19 +9,19 @@
             <legend class="w-auto">Στοιχεία κράτησης</legend>
             <div class="row mb-3">
                 <div class="col-md-2 col-sm-12 justify-content-end d-flex">
-                    <label for="check-in-date" class="col-form-label">check-in-date</label>
+                    <label for="check_in_date" class="col-form-label">check_in_date</label>
                 </div>
                 <div class="col-md-10 col-sm-10">
-                    <input type="date" class="form-control " id="check-in-date" value="{{check-in-date}}" name="check-in-date" placeholder="check-in-date" required>
+                    <input type="date" class="form-control " id="check_in_date" value="{{check_in_date}}" name="check_in_date" placeholder="check_in_date" required>
                     
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-2 col-sm-12 justify-content-end d-flex">
-                    <label for="check-out-date" class="col-form-label">check-out-date</label>
+                    <label for="check_out_date" class="col-form-label">check-out-date</label>
                 </div>
                 <div class="col-md-10 col-sm-10 position-relative">
-                    <input type="date" class="form-control " id="check-out-date" value="{{check-out-date}}" name="check-out-date" placeholder="check-out-date" required>
+                    <input type="date" class="form-control " id="check_out_date" value="{{check_out_date}}" name="check_out_date" placeholder="check_out_date" required>
                     
                 </div>
             </div>            
