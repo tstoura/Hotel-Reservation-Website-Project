@@ -1,0 +1,28 @@
+<div class="home-container">
+    {{#unless username}}
+    <div class="row mt-5">
+        <div class="col-6 offset-3 text-center">
+            <a href="/login">Login</a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-6 offset-3 text-center">
+            <a href="/register">Register</a>
+        </div>
+    </div>
+    {{/unless}}
+    {{#if username}}
+    <div class="row mt-5">
+        <div class="col-6 offset-3 text-center">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+    {{/if}}
+    
+    <div class="row mt-5">
+        <div class="col-6 offset-3 text-center">
+            <a href="/bookNow">Book Now</a>
+        </div>
+    </div>
+
+</div>
