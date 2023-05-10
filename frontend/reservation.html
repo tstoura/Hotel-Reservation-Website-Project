@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Reservation Form</title>
+  <link rel="stylesheet" href="RESsheet.css">
+</head>
+<body>
+<script src="RESscript.js" defer></script>
+  <div class="container">
+    <h1>Hotel Reservation Form</h1>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="checkin">Check-in Date:</label>
+      <input type="date" id="checkin" name="checkin" required>
+      
+      <label for="checkout">Check-out Date:</label>
+      <input type="date" id="checkout" name="checkout" required>
+      
+      <label for="room-type">Room Type:</label>
+      <select id="room-type" name="room-type">
+        <option value="single">Single Room</option>
+        <option value="double">Double Room</option>
+        <option value="suite">Suite</option>
+      </select>
+      
+      <label for="num-guests">Number of Guests:</label>
+      <input type="number" id="num-guests" name="num-guests" min="1" required>
+      
+      <button type="submit">Reserve</button>
+    </form>
+  </div>
+</body>
+</html>

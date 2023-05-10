@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Homepage</title>
+  <link rel="stylesheet" href="hotel_homepage.css">
+</head>
+<body>
+    <header>
+      <!-- flex-grow 2 gia perissotero xwro -->
+      <nav>
+        <ul class="logo">
+          <li><a href="#" class="logo"> <img src="image/logo.png" alt=""> </a></li>
+      </ul>
+
+        <ul class="nav-menu">
+          <li> <a href="Home.html" class="nav-link">Home</a> </li>
+          <li> <a href="#about" class="nav-link">About</a> </li>
+          <li> <a href="#rooms" class="nav-link">Rooms</a> </li>
+          <li> <a href="#services" class="nav-link">Services</a> </li>
+          <li> <a href="#gallery" class="nav-link">Gallery</a> </li>
+          <li> <a href="#contact" class="nav-link">Contact</a> </li>
+          <li> <a href="#reviews" class="nav-link">Reviews</a> </li>
+        </ul>
+
+        <ul class="login-signup">
+            <li><a href="Login.html" class="login">Log In</a></li>
+            <li><a href="SignUp.html" class="signup">Sign Up</a></li>
+        </ul>
+      </nav>
+      </header>
+
+    <section class="hero">
+      <h1>Welcome to Our Hotel</h1>
+      <button>Book Now</button>
+      <h2>Experience Comfort and Luxury</h2>
+      <p>Our hotel offers the finest accommodations, dining options, and amenities for a truly unforgettable stay.</p>
+    </section>
+
+    <section class="featured-rooms">
+      <!-- <h2>Featured Rooms</h2> -->
+      <div class="room">
+        <img src="single.jpg" alt="Room 1">
+        <h3>Single Room</h3>
+        <p>Cozy and comfortable, our single rooms are perfect for solo travellers or short stays.</p>
+      </div>
+      <div class="room">
+        <img src="double-twin.jpg" alt="Room 2">
+        <h3>Double Room</h3>
+        <p>Spacious and elegant, our double rooms are ideal for couples or small families.</p>
+      </div>
+      <div class="room">
+        <img src="triple.jpg" alt="Room 3">
+        <h3>Triple Room</h3>
+        <p>Experience the pinnacle of luxury in our suites, featuring separate living areas and breathtaking views.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2023 Hotel Name. All rights reserved.</p>
+    </footer>
+
+    <script src="hotel_homepage.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
+
+<!--
+js code for book button:
+document.querySelector('.hero button').addEventListener('click', () => {
+    window.location.href = "reservation.html"; // Replace "reservation.html" with the path to your reservation page.
+  });
+  This JavaScript code adds an event listener to the "Book Now" button that redirects users to the reservation page when clicked. Replace "reservation.html" with the path to your reservation page.
+
+  Please note that you need to replace the image URLs in the HTML file (hero.jpg, room1.jpg, room2.jpg, and room3.jpg) with the actual image paths or URLs you want to use.
+
+  The code provided here serves as a basic template for a hotel homepage. You can customize and extend it according to your specific requirements and branding.
+
+
+
+
+   -->
