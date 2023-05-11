@@ -1,4 +1,4 @@
-<div class="container">
+{{!-- <div class="container">
         <div class="row mb-3">
             <div class="col">
                 <h1>Εισάγετε ένα νέο βιβλίο</h1>
@@ -7,4 +7,56 @@
         <div class="Info" >
             <p>{{check_in_date}} - {{check_out_date}} - {{guests}}- {{rooms}}</p>
         </div>
+</div> --}}
+
+<div class="row mt-5">
+    <div class="col-12">
+        <h3>{{check_in_date}} - {{check_out_date}} - {{guests}}</h3>
+        <h2>Rooms: {{#if rooms}} - ({{rooms.length}}) {{/if}}</h2>
+        {{#if rooms}}
+    </div>
 </div>
+<div class="table-responsive-sm">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Τίτλος</th>
+                <th>Συγγραφέας</th>
+                <th class="d-print-none">
+                    <a class="btn btn-sm btn-success" href="/add">Προσθήκη</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each rooms}}
+                <tr>
+                    <td>{{this.number}}</td>
+                    <td>{{this.status}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-danger" href="/delete/{{this.number}}">Διαγραφή</a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+{{/if}}
+{{#unless rooms}}
+    <div class="row mt-5">
+        <div class="col"> No Rooms </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <a class="btn btn-sm btn-success" href="/add">Προσθήκη</a>
+        </div>
+    </div>
+{{/unless}}
+{{!-- {{#if error}}
+    <div class="row mt-5">
+        <div class="col-6 offset-3">
+            <div class="alert alert-primary" role="alert">
+                {{error}}
+            </div>
+        </div>
+    </div>
+{{/if}} --}}

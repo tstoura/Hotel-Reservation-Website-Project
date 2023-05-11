@@ -12,17 +12,21 @@ async function addReservation(newReservation){
     }
 }
 
-// async function getRooms(data){
-//     try {
+async function getRooms(data){
+    try {
         
-//         const rooms = await user.getBooks({ raw: true }); //με raw επιστρέφεται το "καθαρό" αντικείμενο (ο πίνακας) χωρίς πληροφορίες που αφορούν τη sequelize  
-//         return rooms
-//     } catch (error) {
-//         throw error
-//     }
-// }
+        // const rooms = await user.getBooks({ raw: true }) //με raw επιστρέφεται το "καθαρό" αντικείμενο (ο πίνακας) χωρίς πληροφορίες που αφορούν τη sequelize  
+        const rooms = await Room.findAll({ raw: true })
+        // for (let i of rooms){
+        //   console.log("model",i)
+        // }
+        return rooms
+    } catch (error) {
+        throw error
+    }
+}
 
-// Function to generate random data for users
+// Users
 function generateUsers(numUsers) {
     const users = [];
     for (let i = 0; i < numUsers; i++) {
@@ -33,54 +37,97 @@ function generateUsers(numUsers) {
         phone_number: faker.phone.phoneNumber(),
         role:"member"
       }
-      users.push(user);
+      users.push(user)
     }
-    return users;
+    return users
   }
 
- 
+// Reservations
+function generateBookingDate(checkInDate,Pmathod,userID) {
+  const checkOutDate = faker.date.future()
+  if (checkOutDate <= checkInDate) {
+    
+    return generateBookingDate(checkInDate,Pmathod,userID)
+  }
 
-  function generateRoomTypes() {
-    const roomTypes = [];
-    const Typenames=['Single Room','Double Room','Triple Room','Deluxe Suite']
-    const prices = [50,80,150,200]
-    const cap = [1,2,3,2]
+  console.log(userID)
+  const booking = {
+    check_in_date: checkInDate,
+    check_out_date: checkOutDate,
+    total_price: 250,
+    paymentMethod: Pmathod,
+    userID: userID 
+  }
+  console.log(booking.userID)
+  return booking
+}
+  
 
-    console.log("before")
-    for (let i = 0; i < Typenames.length; i++) {
-        console.log("I'm in");
-        const roomType = {
-        typeName: Typenames[i],
-        pricePerNight: prices[i],
-        capacity: cap[i]
-        // Generate other room fields as needed
-        }
-        roomTypes.push(roomType);
+function generateBookings(numBookings, users) {
+const bookings = []
+// const userID = [users[0].userID,users[0].userID,users[1].userID,users[1].userID,users[2].userID,users[2].userID,users[3].userID,users[4].userID]
+const userID  = [0,0,1,1,2,3,4,5] 
+// console.log("userID: ",userID)
+// const userTest = users.map(user => user.userID)
+// console.log("userTest: ", userTest)
+
+for (let i = 0; i < numBookings-2; i++) {
+    const checkInDate = faker.date.future()
+    const booking = generateBookingDate(checkInDate,"card",userID[i])
+    bookings.push(booking)
+
+}
+
+for (let i = numBookings-2; i < numBookings; i++) {
+    const checkInDate = faker.date.future()
+    const booking = generateBookingDate(checkInDate,"cash",userID[i])
+    bookings.push(booking)
+}
+return bookings
+}
+
+//RoomTypes
+function generateRoomTypes() {
+  const roomTypes = [];
+  const Typenames=['Single Room','Double Room','Triple Room','Deluxe Suite']
+  const prices = [50,80,150,200]
+  const cap = [1,2,3,2]
+
+  
+  for (let i = 0; i < Typenames.length; i++) {
+      
+      const roomType = {
+      typeName: Typenames[i],
+      pricePerNight: prices[i],
+      capacity: cap[i]
+      // Generate other room fields as needed
+      }
+      roomTypes.push(roomType)
+  }
+    return roomTypes
     }
-    return roomTypes;
-    }
 
-
-// Function to generate random data for rooms
+// Rooms
 const unavRooms=[]
-function generateRooms(numRooms) {
+function generateRooms(numRooms,types,bookings) {
 const rooms = [];
 for (let i = 0; i < 2; i++) {
-    console.log("rooms!")
     const room = {
     number: 10+i,
     status:"unavailable",
     breakfast: true,
     view: true,
     smoking: false,
-    FreeCancelation: true
-   
-    // Generate other room fields as needed
+    freeCancelation: true,
+    RoomTypeID: types[0].roomTypeID,
+    ReservationReservationID: faker.random.arrayElement(bookings).reservationID
     }
-    console.log("rooms1!")
+    
     rooms.push(room)
     unavRooms.push(room)
+    console.log(types[0],types[0].roomTypeID,room.ReservationReservationID,room.RoomTypeID)
 }
+
 console.log("rooms1")
 for (let i = 0; i < 2; i++) {
     const room = {
@@ -89,8 +136,8 @@ for (let i = 0; i < 2; i++) {
     breakfast: true,
     view: true,
     smoking: false,
-    FreeCancelation: true
-    // Generate other room fields as needed
+    freeCancelation: true,
+    RoomTypeRoomTypeID: types[0].roomTypeID
     }
     rooms.push(room)
 }
@@ -101,8 +148,9 @@ for (let i = 0; i < 2; i++) {
     breakfast: true,
     view: true,
     smoking: false,
-    FreeCancelation: true
-    // Generate other room fields as needed
+    freeCancelation: true,
+    RoomTypeRoomTypeID: types[1].roomTypeID,
+    ReservationReservationID: faker.random.arrayElement(bookings).ReservationID
     }
     rooms.push(room)
     unavRooms.push(room)
@@ -114,8 +162,8 @@ for (let i = 0; i < 2; i++) {
     breakfast: true,
     view: true,
     smoking: false,
-    FreeCancelation: true
-    // Generate other room fields as needed
+    freeCancelation: true,
+    RoomTypeRoomTypeID: types[1].roomTypeID
     }
     rooms.push(room)
 }
@@ -126,8 +174,9 @@ for (let i = 0; i < 2; i++) {
     breakfast: true,
     view: true,
     smoking: false,
-    FreeCancelation: true
-    // Generate other room fields as needed
+    freeCancelation: true,
+    RoomTypeRoomTypeID: types[2].roomTypeID,
+    ReservationReservationID: faker.random.arrayElement(bookings).ReservationID
     }
     rooms.push(room)
     unavRooms.push(room)
@@ -139,8 +188,8 @@ for (let i = 0; i < 2; i++) {
     breakfast: true,
     view: true,
     smoking: false,
-    FreeCancelation: true
-    // Generate other room fields as needed
+    freeCancelation: true,
+    RoomTypeRoomTypeID: types[2].roomTypeID
     }
     rooms.push(room)
 }
@@ -151,8 +200,9 @@ for (let i = 0; i < 2; i++) {
     breakfast: true,
     view: true,
     smoking: false,
-    FreeCancelation: true
-    // Generate other room fields as needed
+    freeCancelation: true,
+    RoomTypeRoomTypeID: types[3].roomTypeID,
+    ReservationReservationID: faker.random.arrayElement(bookings).ReservationID
     }
     rooms.push(room)
     unavRooms.push(room)
@@ -164,85 +214,54 @@ for (let i = 0; i < 2; i++) {
     breakfast: true,
     view: true,
     smoking: false,
-    FreeCancelation: true
-    // Generate other room fields as needed
-    };
-    rooms.push(room);
+    freeCancelation: true,
+    RoomTypeRoomTypeID: types[3].roomTypeID
+    }
+    rooms.push(room)
+    
 }
 
-return rooms;
+return rooms
 }
 
-function generateBooking(checkInDate,Pmathod) {
-  const checkOutDate = faker.date.future();
-  if (checkOutDate <= checkInDate) {
-    // If checkOutDate is not later than checkInDate, generate a new checkOutDate
-    return generateBooking(checkInDate,Pmathod);
-  }
-
-  const booking = {
-    check_in_date: checkInDate,
-    check_out_date: checkOutDate,
-    total_price: 250,
-    paymentMethod: Pmathod,
-    UserUserId: faker.random.arrayElement(users).id // Assign a random room
-  }
-  return booking;
-}
-  
-// Function to generate random data for bookings
-function generateBookings(numBookings, users, rooms) {
-const bookings = [];
-
-
-for (let i = 0; i < numBookings-2; i++) {
-    const checkInDate = faker.date.future()
-    const booking = generateBooking(checkInDate,"card")
-    bookings.push(booking)
-
-}
-
-for (let i = numBookings-2; i < numBookings; i++) {
-    const checkInDate = faker.date.future()
-    const booking = generateBooking(checkInDate,"cash")
-    bookings.push(booking)
-}
-return bookings
-}
-
-
+//Create initial DB data
 async function createdata(){   
    console.log("OK2")
     
-      try {
-        // Generate users
-        const numUsers = 3; // Set the desired number of users
-        const users = generateUsers(numUsers);
-        await User.bulkCreate(users);
-        
-        console.log("OK3")
-        const roomtypes = generateRoomTypes()
-        await Room_Type.bulkCreate(roomtypes)
-        console.log("OK4")
+  try {
+    // Generate users
+    const numUsers = 5 
+    const users = generateUsers(numUsers)
+    await User.bulkCreate(users)    
+    console.log("OK3")
 
-        // Generate rooms
-        const numRooms = 16; // Set the desired number of rooms
-        const rooms = generateRooms(numRooms);
-        await Room.bulkCreate(rooms);
-        console.log("OK5")
+    console.log("usersArray:", User)
+    console.log("user[0]:", User[0])
+    // Generate bookings
+    const numBookings = 8 
+    const bookings = generateBookings(numBookings, users)
+    await Reservation.bulkCreate(bookings)
+    console.log("OK4")
 
-        // Generate bookings
-        const numBookings = 8; // Set the desired number of bookings
-        const bookings = generateBookings(numBookings, users, unavRooms);
-        await Reservation.bulkCreate(bookings);
+    // Generate room_types
+    const roomtypes = generateRoomTypes()
+    await Room_Type.bulkCreate(roomtypes)
+    console.log("OK5")
+
+    // Generate rooms
+    const numRooms = 16 
+    const rooms = generateRooms(numRooms,roomtypes,bookings)
+    await Room.bulkCreate(rooms)
+    console.log("OK6")       
     
-        console.log('Dummy data generated successfully!');
-      } catch (error) {
-        console.error('Error generating dummy data:', error);
-      }
+
+    console.log('Dummy data generated successfully!')
+  } catch (error) {
+    console.error('Error generating dummy data:', error);
+  }
     
     
     
 }
 
-export {addReservation,createdata}
+export {addReservation,createdata,getRooms}

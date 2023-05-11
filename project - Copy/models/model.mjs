@@ -60,11 +60,11 @@ const Reservation = sequelize.define('Reservation',{
         primaryKey: true,
     },
     check_in_date:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     check_out_date:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     total_price:{
@@ -73,24 +73,33 @@ const Reservation = sequelize.define('Reservation',{
     },
     room_count: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     guests_count:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     date:{
-        type: DataTypes.DATE,
-        allowNull: false
+        type: DataTypes.DATEONLY,
+        allowNull: true
     },
     status:{
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     paymentMethod:{
         type: DataTypes.STRING,
         allowNull: false
     }
+    // ,
+    // userID: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    //     references: {
+    //       model: User,
+    //       key: 'userID'
+    //     }
+    //   }
 })
 
 const Review = sequelize.define('Review',{
@@ -104,7 +113,7 @@ const Review = sequelize.define('Review',{
         type: DataTypes.TEXT
     },
     date:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     }
     
@@ -137,7 +146,7 @@ const Room = sequelize.define('Room',{
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    FreeCancelation:{
+    freeCancelation:{
         type: DataTypes.BOOLEAN,
         allowNull: false
     }
@@ -164,15 +173,22 @@ const Room_Type = sequelize.define('Room_Type',{
     }
 })
 
-Review.belongsTo(Reservation)
-Reservation.hasMany(Review)
 
+// User.hasMany(Reservation)
+User.hasMany(Reservation,{foreignKey:"userID"})
 Reservation.belongsTo(User)
-User.hasMany(Reservation)
-Room.belongsTo(Reservation)
-Reservation.hasMany(Room)
-Room.belongsTo(Room_Type)
+
+Reservation.hasMany(Review)
+Review.belongsTo(Reservation)
+
 Room_Type.hasMany(Room)
+Room.belongsTo(Room_Type)
+
+Reservation.hasMany(Room)
+Room.belongsTo(Reservation)
+
+
+
 
 
 await sequelize.sync({alter:true})
