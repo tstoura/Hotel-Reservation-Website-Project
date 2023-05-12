@@ -1,7 +1,7 @@
 {{!-- <div class="container">
         <div class="row mb-3">
             <div class="col">
-                <h1>Εισάγετε ένα νέο βιβλίο</h1>
+                <h1>Add New</h1>
             </div>
         </div>
         <div class="Info" >
@@ -20,11 +20,11 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Τίτλος</th>
-                <th>Συγγραφέας</th>
-                <th class="d-print-none">
-                    <a class="btn btn-sm btn-success" href="/add">Προσθήκη</a>
-                </th>
+                <th>Room</th>
+                <th>Info</th>
+                {{!-- <th class="d-print-none">
+                    <a class="btn btn-sm btn-success" href="/add">Add</a>
+                </th> --}}
             </tr>
         </thead>
         <tbody>
@@ -32,16 +32,21 @@
                 <tr>
                     <td>{{this.number}}</td>
                     <td>{{this.status}}</td>
+                    <td>{{this.roomID}}</td>
+                    {{!-- <td>
+                        <input=epilogh posa dwmatia>
+                    </td> --}}
                     <td>
-                        <a class="btn btn-sm btn-danger" href="/delete/{{this.number}}">Διαγραφή</a>
+                        <a class="btn btn-sm btn-success" href="/bookRoom?roomID={{this.roomID}}">Book</a>
                     </td>
                 </tr>
             {{/each}}
         </tbody>
     </table>
+   <h3> {{rooms}}</h3>
 </div>
 {{/if}}
-{{#unless rooms}}
+{{!-- {{#unless rooms}}
     <div class="row mt-5">
         <div class="col"> No Rooms </div>
     </div>
@@ -50,7 +55,7 @@
             <a class="btn btn-sm btn-success" href="/add">Προσθήκη</a>
         </div>
     </div>
-{{/unless}}
+{{/unless}} --}}
 {{!-- {{#if error}}
     <div class="row mt-5">
         <div class="col-6 offset-3">

@@ -1,5 +1,5 @@
-import {sequelize} from './db-config.mjs';
-import {Op, Model, DataTypes} from 'sequelize';
+import {sequelize} from './db-config.mjs'
+import {Op, Model, DataTypes} from 'sequelize'
 
 const User = sequelize.define('User',{
     userID:{
@@ -91,15 +91,6 @@ const Reservation = sequelize.define('Reservation',{
         type: DataTypes.STRING,
         allowNull: false
     }
-    // ,
-    // userID: {
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false,
-    //     references: {
-    //       model: User,
-    //       key: 'userID'
-    //     }
-    //   }
 })
 
 const Review = sequelize.define('Review',{
@@ -174,8 +165,7 @@ const Room_Type = sequelize.define('Room_Type',{
 })
 
 
-// User.hasMany(Reservation)
-User.hasMany(Reservation,{foreignKey:"userID"})
+User.hasMany(Reservation)
 Reservation.belongsTo(User)
 
 Reservation.hasMany(Review)

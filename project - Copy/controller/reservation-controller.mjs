@@ -21,42 +21,35 @@ const addReservation = async (req,res,next)=>{
         next()
     }
     catch (error) {
-        next(error) //αν έγινε σφάλμα, με το next(error) θα κληθεί το middleware με τις παραμέτρους (error, req, res, next)
+        next(error) 
     }
 }
 
 const availableRooms = async (req,res,next)=>{
     try{
         const desiredData={
-            desired_dateIn : req.query.check_in_date,
-            desired_dateOut : req.query.check_out_date,
-            guests: req.query.guests
+            dateIn : req.query.check_in_date,
+            dateOut : req.query.check_out_date,
+            guests: req.query.guests_count
         }
-        
+       
         const Avrooms = await Reservation.getRooms(desiredData)
-        // for (let i of Avrooms){
-        //     console.log("Controller",i)
-        //   }
+        
+        // console.log("CONTROLLER:", Avrooms)
+        // console.log("CONTROLLER:", Avrooms[0])
         const roomsTest="test"
         res.render("selectRoom", {
             check_in_date: req.query.check_in_date,
             check_out_date: req.query.check_out_date,
             guests: req.query.guests_count,
-            rooms:{Avrooms}
+            rooms: Avrooms
     })
         // next()
     }
     catch (error) {
-        next(error) //αν έγινε σφάλμα, με το next(error) θα κληθεί το middleware με τις παραμέτρους (error, req, res, next)
+        next(error) 
     }
     
-    
-    // try {
-    //     const myBooks = await BookList.loadBooks(req.session.username)
-    //     res.render("booklist", { books: myBooks })
-    // } catch (error) {
-    //     next(error)
-    // }
 }
 
 export {addReservation, availableRooms,createDB}

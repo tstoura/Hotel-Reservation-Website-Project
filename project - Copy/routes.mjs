@@ -58,6 +58,20 @@ router.get("/bookNow", (req, res) => {
 
 router.get("/doSelectRoom",ResController.createDB,ResController.availableRooms)
 
+router.get("/bookRoom",(req,res)=>{
+    const RoomID = req.query.roomID
+    console.log("RoomID: ", RoomID)
+    //ektos tou roomID pernaw kai to posa dwmatia (input sthn sel selectRoom)
+    res.render("userDataBooking",{selectedID:RoomID})
+})
+
+router.post("/doCompleteBooking", (req,res)=>{
+    //ektos tou roomID pernaw kai to posa dwmatia (input sthn sel selectRoom)
+    //kai pernaw ta dedomena tou xrhsth->kalw synarthsh pou pairnei ta stoixeia apo prin
+    //(plhrof room apo to id kai posa dwmatia +stoixeia xrhsth +ypologismoi tot price kai kanei eggrafh sto Reservation)
+    // res.render("/completeBoooking",{roomID:roomID})
+})
+
 // router.get("/selectRoom",ResController.availableRooms)
 
 
