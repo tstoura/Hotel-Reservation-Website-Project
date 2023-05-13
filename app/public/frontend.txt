@@ -1,0 +1,6 @@
+To public περιεχει φακελους του του Frontend imgs, css, js(js μπορει και εκτος αντιστοιχου folder)
+
+gia css:
+<link rel="stylesheet" href="/styles/mystyle.css">
+
+omoia gia js alla me <script>
