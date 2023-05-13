@@ -1,0 +1,78 @@
+<form action="/bookNow" method="post" class="myForm">
+    <div class="container">
+        <fieldset class="border p-2 mb-3">
+            <legend class="w-auto">Στοιχεία κράτησης</legend>
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="check-in-date" class="col-form-label">check-in-date</label>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <input type="date" class="form-control " id="check-in-date" value="{{check-in-date}}" name="check-in-date" placeholder="check-in-date" required>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="check-out-date" class="col-form-label">check-out-date</label>
+                </div>
+                <div class="col-md-10 col-sm-10 position-relative">
+                    <input type="date" class="form-control " id="check-out-date" value="{{check-out-date}}" name="check-out-date" placeholder="check-out-date" required>
+                    
+                </div>
+            </div>            
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="guests_count" class="col-form-label">guests_count</label>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <input type="number" class="form-control" id="guests_count" value="{{guests_count}}" name="guests_count" placeholder="guests_count" required>
+                    
+                </div>
+            </div>
+            
+        </fieldset>
+        <div class="row mb-3">
+            <div class="col">
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+ {{!-- <form action="/bookNow" method="post" class="myForm">
+ 
+  <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bookingModalLabel">Book Now</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="checkInDate">Check-in Date</label>
+              <input type="date" class="form-control" id="checkInDate" required>
+            </div>
+            <div class="form-group">
+              <label for="checkOutDate">Check-out Date</label>
+              <input type="date" class="form-control" id="checkOutDate" required>
+            </div>
+            <div class="form-group">
+              <label for="guests">Number of Guests</label>
+              <input type="number" class="form-control" id="guests" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="" class="btn btn-primary">Book</a>
+          <!-- <button type="button" class="btn btn-primary">Book</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form> --}}
