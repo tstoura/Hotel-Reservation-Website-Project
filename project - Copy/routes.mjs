@@ -56,7 +56,19 @@ router.get("/bookNow", (req, res) => {
 //     })
 // })
 
+//for NOT WORKING //den pairnei tis times
 router.get("/doSelectRoom",ResController.createDB,ResController.availableRooms)
+
+//NOT WORKING
+// router.get("/doSelectRoom", (req, res) => {
+//     console.log(req.query.check_in_date, req.query.check_out_date, req.query.guests_count);
+//     res.render("selectRoom",{check_in_date: req.query.check_in_date,
+//         check_out_date: req.query.check_out_date,
+//         guests: req.query.guests_count})
+// })
+// router.get("/selectRoom", (req, res) => {
+    
+// });
 
 router.get("/bookRoom",(req,res)=>{
     const RoomID = req.query.roomID
@@ -66,7 +78,9 @@ router.get("/bookRoom",(req,res)=>{
 })
 
 router.post("/doCompleteBooking", (req,res)=>{
-    //ektos tou roomID pernaw kai to posa dwmatia (input sthn sel selectRoom)
+    const roomID = req.body.selectedID
+    console.log("roomID: ", roomID ,"userInfo: ",req.body.firstName," " ,req.body.lastName," " ,req.body.email," " ,req.body.phone," " ,req.body.paymentMethod)
+    //den briskei to roomID. akoma prepei na perasw check_in/check_out)
     //kai pernaw ta dedomena tou xrhsth->kalw synarthsh pou pairnei ta stoixeia apo prin
     //(plhrof room apo to id kai posa dwmatia +stoixeia xrhsth +ypologismoi tot price kai kanei eggrafh sto Reservation)
     // res.render("/completeBoooking",{roomID:roomID})

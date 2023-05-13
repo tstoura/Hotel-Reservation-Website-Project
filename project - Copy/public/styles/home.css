@@ -7,7 +7,7 @@ body {
   
   header {
     background-color: #333;
-    padding: 0;
+    
   }
   
   nav ul {
@@ -27,7 +27,8 @@ body {
   }
   
   .hero {
-    background-image: url('hotel-home1-2.jpg');
+    /* background-image: url('hotel-home1-2.jpg'); */
+    background-image: url('/imgs/hotel-home1-2.jpg');
     background-position: center;
     background-size: cover;
     height: 100vh;

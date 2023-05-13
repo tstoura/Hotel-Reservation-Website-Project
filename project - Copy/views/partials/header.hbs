@@ -1,6 +1,6 @@
 {{!-- me bootstrap --}}
 <div class="container" >
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light  header">
         <img src="/resHotel.jpg">
         {{!-- pros8hkh app.use(express.static("public")) sto app gia emfanish tou img --}}
         <a class="navbar-brand" href="/">HotelLogo</a>
@@ -12,6 +12,22 @@
             <li class="nav-item">
                 <a class="nav-link" href="/roomsGalery">Rooms</a>
             </li>
+            {{#unless username}}
+            <li class="nav-item col-6 offset-3 text-center ">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item col-6 offset-3 text-center">
+                <a class="nav-link" href="/register">Register</a>
+            </li>
+            {{/unless}}
+            {{#if username}}
+            <li class="nav-item col-6 offset-3 text-center">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            {{/if}}
         </ul>
     </nav>
 </div>
+
+
+    

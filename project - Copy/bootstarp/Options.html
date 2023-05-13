@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Options</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header>
+    <!-- Header content here -->
+  </header>
+  
+  <section class="options">
+    <h2>Room Options</h2>
+    <div class="reservation-info">
+      <h3>Reservation Details</h3>
+      <div class="form-group">
+        <label for="checkInDate">Check-in Date</label>
+        <input type="date" class="form-control" id="checkInDate" required>
+      </div>
+      <div class="form-group">
+        <label for="checkOutDate">Check-out Date</label>
+        <input type="date" class="form-control" id="checkOutDate" required>
+      </div>
+      <div class="form-group">
+        <label for="guests">Number of Guests</label>
+        <input type="number" class="form-control" id="guests" required>
+      </div>
+    </div>
+    <div class="available-rooms">
+      <h3>Available Rooms</h3>
+      <div class="room-card">
+        <div class="room-image">
+          <img src="room1.jpg" alt="Room 1">
+        </div>
+        <div class="room-details">
+          <h4>Deluxe Room</h4>
+          <p>Spacious room with a king-size bed, en-suite bathroom, and city view.</p>
+          <p class="price">Price per Night: $200</p>
+          <button type="button" class="btn btn-primary">Book Now</button>
+        </div>
+      </div>
+      <div class="room-card">
+        <div class="room-image">
+          <img src="room2.jpg" alt="Room 2">
+        </div>
+        <div class="room-details">
+          <h4>Executive Suite</h4>
+          <p>Luxurious suite with a separate living area, king-size bed, and ocean view.</p>
+          <p class="price">Price per Night: $300</p>
+          <button type="button" class="btn btn-primary">Book Now</button>
+        </div>
+      </div>
+      <!-- Add more room cards as needed -->
+    </div>
+  </section>
+
+  <footer>
+    <!-- Footer content here -->
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
