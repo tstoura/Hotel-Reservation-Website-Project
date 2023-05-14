@@ -1,12 +1,12 @@
-<form action="/bookNow" method="post" class="myForm">
+<form action="/doCompleteBooking" method="post" class="myForm">
     <div class="container">
-        <div class="row mb-3">
-            <div class="col">
-                <h1>Εισάγετε ένα νέο βιβλίο</h1>
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3>{{selectedID}}</h3>
             </div>
         </div>
         <fieldset class="border p-2 mb-3">
-            <legend class="w-auto">Στοιχεία επισκέπτη</legend>
+            <legend class="w-auto">Guest Information</legend>
             <div class="row mb-3">
                 <div class="col-md-2 col-sm-12 justify-content-end d-flex">
                     <label for="firstName" class="col-form-label">First Name</label>
@@ -40,7 +40,6 @@
                 </div>
                 <div class="col-md-10 col-sm-10">
                     <input type="text" class="form-control" id="phone" value="{{phone}}" name="phone" placeholder="phone" required>
-                    
                 </div>
             </div>
             <div class="row mb-3">
@@ -49,7 +48,6 @@
                 </div>
                 <div class="col-md-10 col-sm-10">
                     <input type="text" class="form-control" id="paymentMethod" value="{{paymentMethod}}" name="paymentMethod" placeholder="paymentMethod" required>
-                    
                 </div>
             </div>
             </div>

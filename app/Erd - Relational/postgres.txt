@@ -1,0 +1,110 @@
+CREATE TABLE "public.ROOM" (
+	"roomID" serial NOT NULL,
+	"number" serial NOT NULL,
+	"status" serial NOT NULL,
+	"breakfast" BOOLEAN NOT NULL,
+	"view" BOOLEAN NOT NULL,
+	"smoking" BOOLEAN NOT NULL,
+	"cancelationPolicy" BOOLEAN NOT NULL,
+	"roomTypeID" serial NOT NULL UNIQUE,
+	"reservationID" integer NOT NULL,
+	CONSTRAINT "ROOM_pk" PRIMARY KEY ("roomID")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "public.RESERVATION" (
+	"reservationID" integer NOT NULL,
+	"check_in_date" DATETIME NOT NULL,
+	"check_out_date" DATETIME NOT NULL,
+	"total_price" integer NOT NULL,
+	"room_count" integer NOT NULL,
+	"guests_count" integer NOT NULL,
+	"date" DATE NOT NULL,
+	"status" VARCHAR(255) NOT NULL,
+	"paymentMethod" TEXT NOT NULL,
+	"userID" integer NOT NULL,
+	CONSTRAINT "RESERVATION_pk" PRIMARY KEY ("reservationID")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "public.ROOM_TYPE" (
+	"roomTypeID" serial NOT NULL,
+	"capacity" serial NOT NULL,
+	"price_per_night" serial NOT NULL,
+	"typeName" serial(255) NOT NULL,
+	CONSTRAINT "ROOM_TYPE_pk" PRIMARY KEY ("roomTypeID")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "public.USER" (
+	"userID" serial NOT NULL,
+	"username" VARCHAR(255) NOT NULL,
+	"password" VARCHAR(255) NOT NULL,
+	"first_name" VARCHAR(255) NOT NULL,
+	"last_name" VARCHAR(255) NOT NULL,
+	"email" VARCHAR(255) NOT NULL,
+	"gender" VARCHAR(255) NOT NULL,
+	"nationality" VARCHAR(255) NOT NULL,
+	"address" VARCHAR(255) NOT NULL,
+	"phone_number" integer NOT NULL,
+	"role" VARCHAR(255) NOT NULL,
+	CONSTRAINT "USER_pk" PRIMARY KEY ("userID")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "public.Related_Guest" (
+	"relatedGuestID" integer NOT NULL,
+	"guestID" integer NOT NULL,
+	"first_name" VARCHAR(255) NOT NULL,
+	"last_name" VARCHAR(255) NOT NULL,
+	"email" VARCHAR(255) NOT NULL,
+	"UserID" serial NOT NULL,
+	CONSTRAINT "Related_Guest_pk" PRIMARY KEY ("relatedGuestID","UserID")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "public.REVIEW" (
+	"reviewID" integer NOT NULL,
+	"rate" TEXT NOT NULL,
+	"date" DATE NOT NULL,
+	"reservationID" BINARY NOT NULL,
+	CONSTRAINT "REVIEW_pk" PRIMARY KEY ("reviewID")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+ALTER TABLE "ROOM" ADD CONSTRAINT "ROOM_fk0" FOREIGN KEY ("roomTypeID") REFERENCES "ROOM_TYPE"("roomTypeID");
+ALTER TABLE "ROOM" ADD CONSTRAINT "ROOM_fk1" FOREIGN KEY ("reservationID") REFERENCES "RESERVATION"("reservationID");
+
+ALTER TABLE "RESERVATION" ADD CONSTRAINT "RESERVATION_fk0" FOREIGN KEY ("userID") REFERENCES "USER"("userID");
+
+
+
+ALTER TABLE "Related_Guest" ADD CONSTRAINT "Related_Guest_fk0" FOREIGN KEY ("guestID") REFERENCES "Guest"("guestID");
+ALTER TABLE "Related_Guest" ADD CONSTRAINT "Related_Guest_fk1" FOREIGN KEY ("UserID") REFERENCES "USER"("userID");
+
+ALTER TABLE "REVIEW" ADD CONSTRAINT "REVIEW_fk0" FOREIGN KEY ("reservationID") REFERENCES "RESERVATION"("reservationID");
+
+
+
+
+
+
+
