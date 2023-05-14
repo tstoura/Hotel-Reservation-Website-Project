@@ -33,7 +33,7 @@ app.engine(".hbs", engine({extname:".hbs"}))
 app.set("view engine",".hbs")
 
 //middleware & static files
-app.use('/public', express.static('./public'))
+app.use(express.static("public"))
 
 //Diaxeiristes aithmatwn
 app.use("/",router)

@@ -1,0 +1,90 @@
+<form action="/bookNow" method="post" class="myForm">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col">
+                <h1>Εισάγετε ένα νέο βιβλίο</h1>
+            </div>
+        </div>
+        <fieldset class="border p-2 mb-3">
+            <legend class="w-auto">Στοιχεία κράτησης</legend>
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="check-in-date" class="col-form-label">check-in-date</label>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <input type="date" class="form-control " id="check-in-date" value="{{check-in-date}}" name="check-in-date" placeholder="check-in-date" required>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="check-out-date" class="col-form-label">check-out-date</label>
+                </div>
+                <div class="col-md-10 col-sm-10 position-relative">
+                    <input type="date" class="form-control " id="check-out-date" value="{{check-out-date}}" name="check-out-date" placeholder="check-out-date" required>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="total_price" class="col-form-label">total_price</label>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <input type="number" class="form-control" id="total_price" value="{{total_price}}" name="total_price" placeholder="total_price" required>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="room_count" class="col-form-label">Rooms</label>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <input type="number" class="form-control" id="room_count" value="{{room_count}}" name="room_count" placeholder="room_count" required>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="guests_count" class="col-form-label">guests_count</label>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <input type="number" class="form-control" id="guests_count" value="{{guests_count}}" name="guests_count" placeholder="guests_count" required>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="date" class="col-form-label">Date</label>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <input type="date" class="form-control" id="date" value="{{date}}" name="date" placeholder="date" required>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="status" class="col-form-label">status</label>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <input type="text" class="form-control" id="status" value="{{status}}" name="status" placeholder="status" required>
+                    
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
+                    <label for="paymentMethod" class="col-form-label">paymentMethod</label>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                    <input type="text" class="form-control" id="paymentMethod" value="{{paymentMethod}}" name="paymentMethod" placeholder="paymentMethod" required>
+                    
+                </div>
+            </div>
+            </div>
+        </fieldset>
+        <div class="row mb-3">
+            <div class="col">
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
