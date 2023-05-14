@@ -178,8 +178,5 @@ Reservation.hasMany(Room)
 Room.belongsTo(Reservation)
 
 
-
-
-
 await sequelize.sync({alter:true})
 export {User, Room, Room_Type, Review, Reservation}
