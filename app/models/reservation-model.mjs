@@ -233,14 +233,14 @@ return rooms
 
 //Create initial DB data
 async function createdata(){   
-   console.log("OK2")
+  //  console.log("OK2")
     
   try {
     // Generate users
     const numUsers = 5 
     const users = generateUsers(numUsers)
     await User.bulkCreate(users)    
-    console.log("OK3")
+    // console.log("OK3")
 
     // Generate bookings
     const numBookings = 8 
@@ -249,12 +249,12 @@ async function createdata(){
 
     const bookings = generateBookings(numBookings, usersArray)
     await Reservation.bulkCreate(bookings)
-    console.log("OK4")
+    // console.log("OK4")
 
     // Generate room_types
     const roomtypes = generateRoomTypes()
     await Room_Type.bulkCreate(roomtypes)
-    console.log("OK5")
+    // console.log("OK5")
 
     // Generate rooms
     const numRooms = 16 
@@ -262,7 +262,7 @@ async function createdata(){
     const roomTypesArray = await Room_Type.findAll()
     const rooms = generateRooms(numRooms,roomTypesArray,bookingsArray)
     await Room.bulkCreate(rooms)
-    console.log("OK6")       
+    // console.log("OK6")       
     
 
     console.log('Dummy data generated successfully!')

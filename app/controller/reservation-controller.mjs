@@ -52,4 +52,4 @@ const availableRooms = async (req,res,next)=>{
     
 }
 
-export {addReservation, availableRooms,createDB}
+export {addReservation, availableRooms, createDB}

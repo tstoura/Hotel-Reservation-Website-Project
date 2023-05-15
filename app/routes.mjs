@@ -79,12 +79,15 @@ router.get("/bookRoom",(req,res)=>{
 
 router.post("/doCompleteBooking", (req,res)=>{
     const roomID = req.body.selectedID
-    console.log("roomID: ", roomID ,"userInfo: ",req.body.firstName," " ,req.body.lastName," " ,req.body.email," " ,req.body.phone," " ,req.body.paymentMethod)
+    console.log("roomID: ", roomID,"userInfo: ",req.body.firstName," " ,req.body.lastName," " ,req.body.email," " ,req.body.phone," " ,req.body.paymentMethod)
     //den briskei to roomID. akoma prepei na perasw check_in/check_out)
     //kai pernaw ta dedomena tou xrhsth->kalw synarthsh pou pairnei ta stoixeia apo prin
     //(plhrof room apo to id kai posa dwmatia +stoixeia xrhsth +ypologismoi tot price kai kanei eggrafh sto Reservation)
     // res.render("/completeBoooking",{roomID:roomID})
+    res.render("doCompleteBooking",{})
 })
+
+router.get("/userDataBooking")
 
 // router.get("/selectRoom",ResController.availableRooms)
 
