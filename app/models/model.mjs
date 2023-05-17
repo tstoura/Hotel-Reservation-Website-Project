@@ -59,6 +59,10 @@ const Reservation = sequelize.define('Reservation',{
         autoIncrement:true,
         primaryKey: true,
     },
+    roomID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
     check_in_date:{
         type: DataTypes.DATEONLY,
         allowNull: false
@@ -174,12 +178,8 @@ Review.belongsTo(Reservation)
 Room_Type.hasMany(Room)
 Room.belongsTo(Room_Type)
 
-Reservation.hasMany(Room)
-Room.belongsTo(Reservation)
-
-
-
-
+Room.hasMany(Reservation)
+Reservation.belongsTo(Room)
 
 await sequelize.sync({alter:true})
 export {User, Room, Room_Type, Review, Reservation}

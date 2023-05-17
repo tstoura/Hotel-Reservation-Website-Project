@@ -57,7 +57,7 @@ router.get("/bookNow", (req, res) => {
 // })
 
 //for NOT WORKING //den pairnei tis times
-router.get("/doSelectRoom",ResController.createDB,ResController.availableRooms)
+router.get("/doSelectRoom",ResController.availableRooms)
 
 //NOT WORKING
 // router.get("/doSelectRoom", (req, res) => {

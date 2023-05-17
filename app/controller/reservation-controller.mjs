@@ -27,22 +27,21 @@ const addReservation = async (req,res,next)=>{
 
 const availableRooms = async (req,res,next)=>{
     try{
+        
         const desiredData={
             dateIn : req.query.check_in_date,
             dateOut : req.query.check_out_date,
             guests: req.query.guests_count
         }
        
-        const Avrooms = await Reservation.getRooms(desiredData)
-        
-        // console.log("CONTROLLER:", Avrooms)
-        // console.log("CONTROLLER:", Avrooms[0])
+        const avRooms = await Reservation.getRooms(desiredData)
+
         const roomsTest="test"
         res.render("selectRoom", {
             check_in_date: req.query.check_in_date,
             check_out_date: req.query.check_out_date,
             guests: req.query.guests_count,
-            rooms: Avrooms
+            rooms: avRooms
     })
         // next()
     }

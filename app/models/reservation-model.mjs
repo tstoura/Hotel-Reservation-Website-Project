@@ -18,22 +18,43 @@ async function getRooms(data){
 
     try {
       
-      const rooms = await Room.findAll({ raw: true })
+      const overlappingReservations = await Reservation.findAll({ 
+        where: {
+          [Op.or]:[
+            {
+              check_in_date: {
+                [Op.lte]: data.dateOut,
+              },
+              check_out_date: {
+                [Op.gte]: data.dateIn,
+              },
+            },
+            {
+              check_in_date: {
+                [Op.between]: [data.dateIn, data.dateOut],
+              },
+            },
+            {
+              check_out_date: {
+                [Op.between]: [data.dateIn, data.dateOut],
+              },
+            },
+          ],
+        },
+      });
 
-      // const rooms = await Room.findAll({attributes: ['roomID'],
-      //                                   include: {                                                                                    
-      //                                     model: Room_Type,
-      //                                     attributes: ['typeName'],
-      //                                     where: {
-      //                                       capacity: {
-      //                                         [Op.gte]: data.guests
-      //                                       }
-      //                                     }
-      //                                   },
-      //                                   raw: true})
-      
-      // console.log("MODEL: ",rooms)
-      return rooms
+      const roomIDs = overlappingReservations.map( (reservation) => reservation.roomID )
+
+      const availableRooms = await Room.findAll({
+        where: {
+          roomID: {
+            [Op.notIn]: roomIDs,
+          },
+        },
+      });
+
+      return availableRooms
+
     } catch (error) {
         throw error
   }
@@ -83,7 +104,6 @@ for (let i = 0; i < numBookings-2; i++) {
     const checkInDate = faker.date.future()
     const booking = generateBookingDate(checkInDate,"card",userID[i])
     bookings.push(booking)
-
 }
 
 for (let i = numBookings-2; i < numBookings; i++) {
@@ -268,10 +288,7 @@ async function createdata(){
     console.log('Dummy data generated successfully!')
   } catch (error) {
     console.error('Error generating dummy data:', error);
-  }
-    
-    
-    
+  }    
 }
 
 export {addReservation,createdata,getRooms}
