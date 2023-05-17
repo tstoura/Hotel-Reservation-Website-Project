@@ -14,50 +14,75 @@ async function addReservation(newReservation){
     }
 }
 
+// async function getRooms(data){
+
+//     try {
+      
+//       const overlappingReservations = await Reservation.findAll({ 
+//         where: {
+//           [Op.or]:[
+//             {
+//               check_in_date: {
+//                 [Op.lte]: data.dateOut,
+//               },
+//               check_out_date: {
+//                 [Op.gte]: data.dateIn,
+//               },
+//             },
+//             {
+//               check_in_date: {
+//                 [Op.between]: [data.dateIn, data.dateOut],
+//               },
+//             },
+//             {
+//               check_out_date: {
+//                 [Op.between]: [data.dateIn, data.dateOut],
+//               },
+//             },
+//           ],
+//         },
+//       });
+
+//       const roomIDs = overlappingReservations.map( (reservation) => reservation.roomID )
+
+//       const availableRooms = await Room.findAll({
+//         where: {
+//           roomID: {
+//             [Op.notIn]: roomIDs,
+//           },
+//         },
+//       });
+
+//       return availableRooms
+
+//     } catch (error) {
+//         throw error
+//   }
+// }
+
 async function getRooms(data){
 
-    try {
-      
-      const overlappingReservations = await Reservation.findAll({ 
-        where: {
-          [Op.or]:[
-            {
-              check_in_date: {
-                [Op.lte]: data.dateOut,
-              },
-              check_out_date: {
-                [Op.gte]: data.dateIn,
-              },
-            },
-            {
-              check_in_date: {
-                [Op.between]: [data.dateIn, data.dateOut],
-              },
-            },
-            {
-              check_out_date: {
-                [Op.between]: [data.dateIn, data.dateOut],
-              },
-            },
-          ],
-        },
-      });
+  try {
+    
+    const rooms = await Room.findAll({ raw: true })
 
-      const roomIDs = overlappingReservations.map( (reservation) => reservation.roomID )
-
-      const availableRooms = await Room.findAll({
-        where: {
-          roomID: {
-            [Op.notIn]: roomIDs,
-          },
-        },
-      });
-
-      return availableRooms
-
-    } catch (error) {
-        throw error
-  }
+    // const rooms = await Room.findAll({attributes: ['roomID'],
+    //                                   include: {                                                                                    
+    //                                     model: Room_Type,
+    //                                     attributes: ['typeName'],
+    //                                     where: {
+    //                                       capacity: {
+    //                                         [Op.gte]: data.guests
+    //                                       }
+    //                                     }
+    //                                   },
+    //                                   raw: true})
+    
+    // console.log("MODEL: ",rooms)
+    return rooms
+  } catch (error) {
+      throw error
+}
 }
 
 // Users
