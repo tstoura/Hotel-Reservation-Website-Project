@@ -4,9 +4,10 @@ import 'dotenv/config'
 import express from 'express'
 import { engine } from 'express-handlebars'
 import {router} from './routes.mjs'
+import {sequelize, connectDB} from './models/db-config.mjs'
 
-import session from 'express-session'
-import createMemoryStore from 'memorystore'
+// import session from 'express-session'
+// import createMemoryStore from 'memorystore'
 
 // const MemoryStore = createMemoryStore(session)
 
@@ -24,6 +25,7 @@ import createMemoryStore from 'memorystore'
 const app = express()
 const PORT = process.env.PORT || 3000
 
+connectDB(sequelize)
 // //sessions
 // app.use(HotelResSession) //elegxei an ka8e eiserxomeno aithma sthn efarmogh sunodeuetai apo cookie me sid pou exei ekdo8ei apo authn thn efarmhogh - sugkish me secret
 

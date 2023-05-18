@@ -3,7 +3,6 @@ import * as Reservation from "../models/reservation-model.mjs"
 const createDB = async(req,res,next)=>{
     Reservation.createdata()
     next()
-    
 }
 
 const addReservation = async (req,res,next)=>{

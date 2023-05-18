@@ -59,10 +59,6 @@ const Reservation = sequelize.define('Reservation',{
         autoIncrement:true,
         primaryKey: true,
     },
-    roomID: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
     check_in_date:{
         type: DataTypes.DATEONLY,
         allowNull: false
@@ -111,7 +107,6 @@ const Review = sequelize.define('Review',{
         type: DataTypes.DATEONLY,
         allowNull: false
     }
-    
 })
 
 const Room = sequelize.define('Room',{
