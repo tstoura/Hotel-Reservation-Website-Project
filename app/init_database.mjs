@@ -199,7 +199,8 @@ function generateUsers(numUsers) {
       users.push(user)
     }
     return users
-  }
+}
+
 const randomUsers = generateUsers(5)
 await User.bulkCreate(randomUsers);
 
@@ -245,7 +246,6 @@ function generateRooms(numRooms, roomtypes){
     
       rooms.push(room);
     }
-    
     return rooms;
   }
 
