@@ -190,6 +190,8 @@ function generateUsers(numUsers) {
     for (let i = 0; i < numUsers; i++) {
       const user = {
         userID: i,
+        username: faker.internet.userName(),
+        password: faker.internet.password(),
         firstName: faker.name.findName(),
         lastName: faker.name.lastName(),
         email: faker.internet.email(),
@@ -198,6 +200,14 @@ function generateUsers(numUsers) {
       }
       users.push(user)
     }
+    users.push({userID: -1,
+            username: 'admin',
+            password: 'admin',
+            firstName: faker.name.findName(),
+            lastName: faker.name.lastName(),
+            email: faker.internet.email(),
+            phone_number: faker.phone.phoneNumber(),
+            role:"admin"})
     return users
 }
 

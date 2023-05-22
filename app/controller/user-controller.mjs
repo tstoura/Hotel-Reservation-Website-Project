@@ -1,4 +1,5 @@
 import * as User from '../models/user-model.mjs' // version 3 with ORM sequelize, postgress
+import * as seqObj from '../models/model.mjs'
 
 const doLogin = async (req, res, next) => {
 
@@ -15,6 +16,21 @@ const doLogin = async (req, res, next) => {
     //     throw new Error("άγνωστο σφάλμα")
     // }
 
+}
+
+const findAllUsers = async (req, res, next) => {
+    const users = await seqObj.User.findAll()
+    const sanitized_users = users.map( entry => entry.dataValues)
+    req.users = sanitized_users
+    next()
+}
+
+
+const findAllBookings = async (req, res, next) => {
+    const bookings = await seqObj.Reservation.findAll()
+    const sanitized_bookings = bookings.map( entry => entry.dataValues)
+    req.bookings = sanitized_bookings
+    next()
 }
 
 const doRegister = async (req, res, next) => {
@@ -50,4 +66,4 @@ const doRegister = async (req, res, next) => {
 // }
 
 // export { checkIfAuthenticated, doLogin, doRegister, doLogout }
-export { doRegister, doLogin }
+export { doRegister, doLogin, findAllUsers, findAllBookings }

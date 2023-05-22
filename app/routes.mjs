@@ -31,9 +31,18 @@ router.get("/login", (req, res) => {
 router.post("/dologin",
     UserController.doLogin,
     (req, res) => {
-        res.render("home",{username: req.body.username})
+        if(req.body.username == 'admin' && req.body.password == 'admin'){
+            res.render("admin", {username: req.body.username})
+        }
+        else{
+            res.render("home",{username: req.body.username})
+        }
     }
 )
+
+router.get("/logout", (req, res) => {
+    res.render("home")
+})
 
 // router.get("/logout", UserController.doLogout, (req, res) => {
 //     // req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
@@ -91,5 +100,18 @@ router.get("/userDataBooking")
 
 // router.get("/selectRoom",ResController.availableRooms)
 
+//admin!
+
+router.get("/showUsers", UserController.findAllUsers, 
+    (req,res) => {
+    res.render("showUsers", {users: req.users})
+    console.log(req.users)
+})
+
+router.get("/showBookings", UserController.findAllBookings, 
+    (req,res) => {
+    res.render("showBookings", {bookings: req.bookings})
+    console.log(req.bookings)
+})
 
 export {router}

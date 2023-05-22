@@ -17,7 +17,6 @@ async function addReservation(newReservation){
 async function getRooms(data){
 
     try {
-      
       const overlappingReservations = await Reservation.findAll({ 
         where: {
           [Op.or]:[
@@ -91,6 +90,8 @@ function generateUsers(numUsers) {
   for (let i = 0; i < numUsers; i++) {
     const user = {
       userID: i,
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
       firstName: faker.name.findName(),
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
