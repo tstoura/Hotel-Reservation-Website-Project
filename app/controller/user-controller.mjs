@@ -33,6 +33,23 @@ const findAllBookings = async (req, res, next) => {
     next()
 }
 
+const doAddBooking = async (req, res, next) => {
+    try {
+        await seqObj.Reservation.addReservation({
+            "check_in_date": req.body["check_in_date"],
+            "check_out_date": req.body["ckeck_out_date"],
+            "total_price": req.body["total_price"],
+            "guests_count": req.body["guests_count"],
+            "paymentMethod": req.body["paymentMethod"],
+            "UserUserID": req.body["userID"],
+            "RoomRoomID": req.body["roomID"]
+        })
+        next()
+    } catch(error){
+        next(error)
+    }
+}
+
 const doRegister = async (req, res, next) => {
 
     try {
@@ -51,6 +68,7 @@ const doRegister = async (req, res, next) => {
     }
 }
 
+
 // const doLogout = (req, res, next) => {
 //     req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
 //     next()
@@ -66,4 +84,5 @@ const doRegister = async (req, res, next) => {
 // }
 
 // export { checkIfAuthenticated, doLogin, doRegister, doLogout }
-export { doRegister, doLogin, findAllUsers, findAllBookings }
+
+export { doRegister, doLogin, findAllUsers, findAllBookings, doAddBooking }

@@ -14,7 +14,7 @@ body {
   .sidebar h3 {
     padding: 20px;
     margin-bottom: 0;
-    background-color: #e9ecef;
+    background-color: #333;
   }
 
   .sidebar ul {
@@ -34,7 +34,7 @@ body {
 
   .sidebar ul li a:hover {
     color: #ccc;
-    text-decoration: underline;
+    /* text-decoration: underline; */
   }
 
   .main-container {

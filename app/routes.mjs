@@ -40,6 +40,17 @@ router.post("/dologin",
     }
 )
 
+router.get("/addBooking", (req, res) => {
+    res.render("addBooking")
+})
+
+router.post("/doAddBooking", 
+    UserController.doAddBooking,
+    (req, res) => {
+        res.render("showBookings")
+    }
+)
+
 router.get("/logout", (req, res) => {
     res.render("home")
 })
@@ -76,7 +87,6 @@ router.get("/doSelectRoom",ResController.createDB,ResController.availableRooms)
 //         guests: req.query.guests_count})
 // })
 // router.get("/selectRoom", (req, res) => {
-    
 // });
 
 router.get("/bookRoom",(req,res)=>{

@@ -40,6 +40,11 @@
                     </tr>
                 {{/each}}
             </tbody>
+            <div class="row mt-2">
+                <div class="col">
+                    <a class="btn btn-sm btn-secondary" href="/addBooking">Add Booking</a>
+                </div>
+            </div>
         </table>
     {{!-- <h3> {{users}}</h3> --}}
     </div>
@@ -48,11 +53,7 @@
     <div class="row mt-5">
         <div class="col">No Bookings Found!</div>
     </div>
-    {{!-- <div class="row mt-2">
-        <div class="col">
-            <a class="btn btn-sm btn-success" href="/add">Προσθήκη</a>
-        </div>
-    </div> --}}
+ 
 {{/unless}}
 {{#if error}} 
     <div class="row mt-5">
