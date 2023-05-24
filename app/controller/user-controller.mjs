@@ -5,7 +5,7 @@ const doLogin = async (req, res, next) => {
 
     //έλεγχος εγκυρότητας οκ
     const user = await User.login(req.body.username, req.body.password)
-    console.log(user)
+    // console.log(user)
     next()
     // if (user) {
     //     req.session.username = req.body.username // το username μπαίνει σαν μεταβλητή συνεδρίας

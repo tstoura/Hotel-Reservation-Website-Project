@@ -10,6 +10,44 @@ const findAllUsers = async (req, res, next) => {
     next()
 }
 
+const adminDoAddUser = async (req, res, next) => {
+    try{
+        console.log(req.body)
+        await Admin.addUser({
+            "userID": req.body["userID"],
+            "username": "theo",  //prosorino!!
+            "password": "1234asd", //prosorino!!
+            "firstName": req.body["firstName"],
+            "lastName": req.body["lastName"],
+            "email":req.body["email"],
+            "gender": female, //prosorino!!
+            "nationality": "Greek", //prosorino!
+            "address": req.body["address"],
+            "phone_number": req.body["phone_number"],
+            "role": "member",
+        })
+        console.log("perase")
+        req.message = 'User Added!'
+        next()
+    } catch(error){
+        req.message = 'Failed to add User!'
+    }
+}
+
+const adminDeleteUser = async(req, res, next) => {
+    try{
+        // await Admin.deleteReservation({
+        //     "reservationID": req.body["reservationID"]
+        // })
+        // console.log(req.body["reservationID"])
+        await Admin.deleteUser(req.query["userID"])
+        req.message = 'User successfully deleted!'
+        next()
+    } catch(error){
+        req.message = 'Failed to delete user!'
+
+    }
+}
 
 const findAllBookings = async (req, res, next) => {
     const bookings = await seqObj.Reservation.findAll()
@@ -42,7 +80,8 @@ const adminDeleteBooking = async(req, res, next) => {
         // await Admin.deleteReservation({
         //     "reservationID": req.body["reservationID"]
         // })
-        await Admin.deleteReservation(req.body["reservationID"])
+        // console.log(req.body["reservationID"])
+        await Admin.deleteReservation(req.query["reservationID"])
         req.message = 'Booking successfully deleted!'
         next()
     } catch(error){
@@ -51,4 +90,4 @@ const adminDeleteBooking = async(req, res, next) => {
     }
 }
 
-export{findAllUsers, findAllBookings, adminDoAddBooking, adminDeleteBooking}
+export{findAllUsers, adminDoAddUser, adminDeleteUser, findAllBookings, adminDoAddBooking, adminDeleteBooking}

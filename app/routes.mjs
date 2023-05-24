@@ -99,20 +99,37 @@ router.post("/doCompleteBooking", (req,res)=>{
 
 router.get("/userDataBooking")
 
-// router.get("/selectRoom",ResController.availableRooms)
-
 //admin!
-
+//show, add & delete users (add not completed)
 router.get("/adminShowUsers", AdminController.findAllUsers, 
     (req,res) => {
     res.render("adminShowUsers", {users: req.users})
-    // console.log(req.users)
 })
 
+router.get("/adminAddUser", (req, res) => {
+    res.render("adminAddUser")
+})
+
+router.post("/adminDoAddUser",
+    AdminController.adminDoAddUser,
+    AdminController.findAllUsers,
+    (req, res) => {
+        console.log(req.body),
+        res.render("adminShowUsers", {users: req.users} ,{message: req.message})
+    }
+)
+
+router.get("/adminDeleteUser", 
+    AdminController.adminDeleteUser,
+    AdminController.findAllUsers, 
+    (req,res) => {
+    res.render("adminShowUsers", {users: req.users})
+})
+
+//show, add & delete bookings
 router.get("/adminShowBookings", AdminController.findAllBookings, 
     (req,res) => {
     res.render("adminShowBookings", {bookings: req.bookings})
-    // console.log(req.bookings)
 })
 
 router.get("/adminAddBooking", (req, res) => {
@@ -125,24 +142,12 @@ router.post("/adminDoAddBooking",
         res.render("adminResTemplate", {message: req.message})
     }
 )
-router.post("/adminDeleteBooking", AdminController.adminDeleteBooking,
-//     AdminController.findAllBookings, 
-//     (req,res) => {
-//     res.render("showBookings", {bookings: req.bookings})
-//     console.log(req.bookings)
-// }
-)
-
-router.get("/adminDeleteBooking", (req, res) => {
+router.get("/adminDeleteBooking", 
+    AdminController.adminDeleteBooking,
     AdminController.findAllBookings, 
     (req,res) => {
-    res.render("showBookings", {bookings: req.bookings})
-    console.log(req.bookings)
-}
-    // res.render("adminDeleteBooking")
+    res.render("adminShowBookings", {bookings: req.bookings})
 })
-
-
 
 
 export {router}

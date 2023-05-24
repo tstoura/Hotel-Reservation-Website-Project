@@ -1,5 +1,8 @@
 
 <div class="row mt-5">
+    {{#if message}}
+        <h4>{{message}}</h4>
+    {{/if}}
     <div class="col-12">
         <h3>Users Registered: {{users.length}}</h3>
         {{!-- <h3>Check-out Date:{{check_out_date}}</h3>
@@ -7,6 +10,7 @@
         <h2>Available Rooms: {{#if rooms}} {{rooms.length}} {{/if}}</h2> --}}
     </div>
 </div>
+
 
 {{#if users}}
     <div class="table-responsive-sm">
@@ -32,7 +36,7 @@
                         <td>{{this.lastName}}</td>
                         
                         <td>
-                            <a class="btn btn-sm btn-secondary" href="/deleteUser">Delete User</a>
+                            <a class="btn btn-sm btn-secondary" href="/adminDeleteUser?userID={{this.userID}}">Delete User</a>
                         </td>
                     </tr>
                 {{/each}}
