@@ -10,4 +10,13 @@ async function addReservation(newReservation){
     }
 }
 
-export {addReservation}
+async function deleteReservation(reservationID){
+    try{
+        console.log(reservationID)
+        const reservationToBeDeleted = await Reservation.destroy({where: {reservationID: reservationID}})
+    }catch(error){
+        throw error
+    }
+}
+
+export {addReservation, deleteReservation}

@@ -37,4 +37,18 @@ const adminDoAddBooking = async (req, res, next) => {
     }
 }
 
-export{findAllUsers, findAllBookings, adminDoAddBooking}
+const adminDeleteBooking = async(req, res, next) => {
+    try{
+        // await Admin.deleteReservation({
+        //     "reservationID": req.body["reservationID"]
+        // })
+        await Admin.deleteReservation(req.body["reservationID"])
+        req.message = 'Booking successfully deleted!'
+        next()
+    } catch(error){
+        req.message = 'Failed to delete booking!'
+
+    }
+}
+
+export{findAllUsers, findAllBookings, adminDoAddBooking, adminDeleteBooking}

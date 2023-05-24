@@ -106,13 +106,13 @@ router.get("/userDataBooking")
 router.get("/adminShowUsers", AdminController.findAllUsers, 
     (req,res) => {
     res.render("adminShowUsers", {users: req.users})
-    console.log(req.users)
+    // console.log(req.users)
 })
 
 router.get("/adminShowBookings", AdminController.findAllBookings, 
     (req,res) => {
     res.render("adminShowBookings", {bookings: req.bookings})
-    console.log(req.bookings)
+    // console.log(req.bookings)
 })
 
 router.get("/adminAddBooking", (req, res) => {
@@ -125,11 +125,24 @@ router.post("/adminDoAddBooking",
         res.render("adminResTemplate", {message: req.message})
     }
 )
-// router.get("/deleteBooking", AdminController.deleteBooking,
+router.post("/adminDeleteBooking", AdminController.adminDeleteBooking,
 //     AdminController.findAllBookings, 
 //     (req,res) => {
 //     res.render("showBookings", {bookings: req.bookings})
 //     console.log(req.bookings)
-// })
+// }
+)
+
+router.get("/adminDeleteBooking", (req, res) => {
+    AdminController.findAllBookings, 
+    (req,res) => {
+    res.render("showBookings", {bookings: req.bookings})
+    console.log(req.bookings)
+}
+    // res.render("adminDeleteBooking")
+})
+
+
+
 
 export {router}

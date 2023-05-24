@@ -187,6 +187,7 @@ await sequelize.sync({alter:true})
 // Users
 function generateUsers(numUsers) {
     const users = [];
+    // const gender = [female, male]
     for (let i = 0; i < numUsers; i++) {
       const user = {
         userID: i,
