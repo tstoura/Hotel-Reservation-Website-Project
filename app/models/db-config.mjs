@@ -10,6 +10,7 @@ const sequelize = new Sequelize({
     password: process.env.POSTGRES_PASSWORD||'1234',
     database:"HotelRes",
     logging: false,
+    omitNull: true, //na min stelnetai tipota an ta values einai null
     define:{
         timestamps:false,
         freezeTableName: true

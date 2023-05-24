@@ -1,0 +1,61 @@
+
+<div class="row mt-5">
+    <div class="col-12">
+        <h3>Bookings: {{bookings.length}}</h3>
+        {{!-- <h3>Check-out Date:{{check_out_date}}</h3>
+        <h3>Number Of Guests: {{guests}}</h3>
+        <h2>Available Rooms: {{#if rooms}} {{rooms.length}} {{/if}}</h2> --}}
+    </div>
+</div>
+
+{{#if bookings}}
+    <div class="table-responsive-sm">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Reservation ID</th>
+                    <th>User ID</th>
+                    <th>Room ID</th>
+                    <th>Check-In Date</th>
+                    <th>Check-Out Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each bookings}} 
+                {{!-- mono gia ta available rooms!! --}}
+                    <tr>
+                        <td>{{this.reservationID}}</td>
+                        <td>{{this.UserUserID}}</td>
+                        <td>{{this.RoomRoomID}}</td>
+                        <td>{{this.check_in_date}}</td>
+                        <td>{{this.check_out_date}}</td>
+                        <td>
+                            <a class="btn btn-sm btn-secondary" href="/deleteBooking?reservationID={{this.reservationID}}">Delete Booking</a>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+            <div class="row mt-2">
+                <div class="col">
+                    <a class="btn btn-sm btn-secondary" href="/adminAddBooking">Add Booking</a>
+                </div>
+            </div>
+        </table>
+    {{!-- <h3> {{users}}</h3> --}}
+    </div>
+{{/if}}
+{{#unless bookings}}
+    <div class="row mt-5">
+        <div class="col">No Bookings Found!</div>
+    </div>
+ 
+{{/unless}}
+{{#if error}} 
+    <div class="row mt-5">
+        <div class="col-6 offset-3">
+            <div class="alert alert-primary" role="alert">
+                {{error}}
+            </div>
+        </div>
+    </div>
+{{/if}}

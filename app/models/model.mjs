@@ -5,7 +5,7 @@ const User = sequelize.define('User',{
     userID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: 1,
         primaryKey: true,
     },
     username:{
@@ -56,7 +56,7 @@ const Reservation = sequelize.define('Reservation',{
     reservationID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement:true,
+        autoIncrement: 1,
         primaryKey: true,
     },
     check_in_date:{
@@ -97,7 +97,7 @@ const Review = sequelize.define('Review',{
     reviewID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: 1,
         primaryKey: true,
     },
     rate:{
@@ -113,7 +113,7 @@ const Room = sequelize.define('Room',{
     roomID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: 1,
         primaryKey: true,
     },
     number:{
@@ -146,7 +146,7 @@ const Room_Type = sequelize.define('Room_Type',{
     roomTypeID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: 1,
         primaryKey: true,
     },
     capacity:{

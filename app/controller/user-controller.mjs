@@ -18,37 +18,38 @@ const doLogin = async (req, res, next) => {
 
 }
 
-const findAllUsers = async (req, res, next) => {
-    const users = await seqObj.User.findAll()
-    const sanitized_users = users.map( entry => entry.dataValues)
-    req.users = sanitized_users
-    next()
-}
+// const findAllUsers = async (req, res, next) => {
+//     const users = await seqObj.User.findAll()
+//     const sanitized_users = users.map( entry => entry.dataValues)
+//     req.users = sanitized_users
+//     next()
+// }
 
 
-const findAllBookings = async (req, res, next) => {
-    const bookings = await seqObj.Reservation.findAll()
-    const sanitized_bookings = bookings.map( entry => entry.dataValues)
-    req.bookings = sanitized_bookings
-    next()
-}
-
-const doAddBooking = async (req, res, next) => {
-    try {
-        await seqObj.Reservation.addReservation({
-            "check_in_date": req.body["check_in_date"],
-            "check_out_date": req.body["ckeck_out_date"],
-            "total_price": req.body["total_price"],
-            "guests_count": req.body["guests_count"],
-            "paymentMethod": req.body["paymentMethod"],
-            "UserUserID": req.body["userID"],
-            "RoomRoomID": req.body["roomID"]
-        })
-        next()
-    } catch(error){
-        next(error)
-    }
-}
+// const findAllBookings = async (req, res, next) => {
+//     const bookings = await seqObj.Reservation.findAll()
+//     const sanitized_bookings = bookings.map( entry => entry.dataValues)
+//     req.bookings = sanitized_bookings
+//     next()
+// }
+// 
+// const doAddBooking = async (req, res, next) => {
+//     try {
+//         console.log(req.body)
+//         await User.addReservation({
+//             "check_in_date": req.body["check_in_date"],
+//             "check_out_date": req.body["check_out_date"],
+//             "total_price": req.body["total_price"],
+//             "guests_count": req.body["guests_count"],
+//             "paymentMethod": req.body["paymentMethod"],
+//             "UserUserID": req.body["userID"],
+//             "RoomRoomID": req.body["roomID"]
+//         })
+//         next()
+//     } catch(error){
+//         next(error)
+//     }
+// }
 
 const doRegister = async (req, res, next) => {
 
@@ -85,4 +86,4 @@ const doRegister = async (req, res, next) => {
 
 // export { checkIfAuthenticated, doLogin, doRegister, doLogout }
 
-export { doRegister, doLogin, findAllUsers, findAllBookings, doAddBooking }
+export { doRegister, doLogin }

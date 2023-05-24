@@ -2,6 +2,7 @@ import express from 'express'
 // import {BookList} from './booklist.mjs'
 import * as ResController from './controller/reservation-controller.mjs'
 import * as UserController from './controller/user-controller.mjs'
+import * as AdminController from './controller/admin-controller.mjs'
 
 const router = express.Router()
 
@@ -40,16 +41,6 @@ router.post("/dologin",
     }
 )
 
-router.get("/addBooking", (req, res) => {
-    res.render("addBooking")
-})
-
-router.post("/doAddBooking", 
-    UserController.doAddBooking,
-    (req, res) => {
-        res.render("showBookings")
-    }
-)
 
 router.get("/logout", (req, res) => {
     res.render("home")
@@ -112,16 +103,33 @@ router.get("/userDataBooking")
 
 //admin!
 
-router.get("/showUsers", UserController.findAllUsers, 
+router.get("/adminShowUsers", AdminController.findAllUsers, 
     (req,res) => {
-    res.render("showUsers", {users: req.users})
+    res.render("adminShowUsers", {users: req.users})
     console.log(req.users)
 })
 
-router.get("/showBookings", UserController.findAllBookings, 
+router.get("/adminShowBookings", AdminController.findAllBookings, 
     (req,res) => {
-    res.render("showBookings", {bookings: req.bookings})
+    res.render("adminShowBookings", {bookings: req.bookings})
     console.log(req.bookings)
 })
+
+router.get("/adminAddBooking", (req, res) => {
+    res.render("adminAddBooking")
+})
+
+router.post("/adminDoAddBooking", 
+    AdminController.adminDoAddBooking,
+    (req, res) => {
+        res.render("adminResTemplate", {message: req.message})
+    }
+)
+// router.get("/deleteBooking", AdminController.deleteBooking,
+//     AdminController.findAllBookings, 
+//     (req,res) => {
+//     res.render("showBookings", {bookings: req.bookings})
+//     console.log(req.bookings)
+// })
 
 export {router}

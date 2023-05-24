@@ -11,7 +11,7 @@ const User = sequelize.define('User',{
     userID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: 1,
         primaryKey: true,
     },
     username:{
@@ -62,7 +62,7 @@ const Reservation = sequelize.define('Reservation',{
     reservationID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement:true,
+        autoIncrement: 1,
         primaryKey: true,
     },
     check_in_date:{
@@ -103,7 +103,7 @@ const Review = sequelize.define('Review',{
     reviewID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: 1,
         primaryKey: true,
     },
     rate:{
@@ -119,7 +119,7 @@ const Room = sequelize.define('Room',{
     roomID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: 1,
         primaryKey: true,
     },
     number:{
@@ -152,7 +152,7 @@ const Room_Type = sequelize.define('Room_Type',{
     roomTypeID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement: 1,
         primaryKey: true,
     },
     capacity:{
@@ -195,6 +195,9 @@ function generateUsers(numUsers) {
         firstName: faker.name.findName(),
         lastName: faker.name.lastName(),
         email: faker.internet.email(),
+        gender: 'female',
+        nationality: 'Greek',
+        address: 'Sok 201',
         phone_number: faker.phone.phoneNumber(),
         role:"member"
       }
@@ -228,7 +231,8 @@ function generateRoomTypes() {
         roomTypeID: i,
         typeName: Typenames[i],
         pricePerNight: prices[i],
-        capacity: cap[i]
+        capacity: cap[i],
+        typeName: 'a'
         // Generate other room fields as needed
         }
         roomTypes.push(roomType)
@@ -275,6 +279,10 @@ function generateBookingDate(checkInDate, paymentMethod, userID, roomID) {
         check_in_date: checkInDate,
         check_out_date: checkOutDate,
         total_price: 250,
+        room_count: '3',
+        guests_count: '5',
+        date: '2023-05-29',
+        status: 'available',
         paymentMethod: paymentMethod,
         UserUserID: userID,
         RoomRoomID: roomID,
@@ -304,7 +312,10 @@ function generateBookings(numBookings, users, rooms) {
 
 // const rooms = Room.findAll()
 const bookings = generateBookings(5, randomUsers, rooms)
-await Reservation.bulkCreate(bookings)
+for(let i = 0; i < bookings.length; i++){
+    await Reservation.create(bookings[i])
+}
+// await Reservation.bulkCreate(bookings)
 // console.log("OK4")
 
 // export {User, Room, Room_Type, Review, Reservation}
