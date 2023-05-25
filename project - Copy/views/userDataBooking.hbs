@@ -1,0 +1,52 @@
+
+
+<div class="container">
+    <div class="row">        
+        <div class="col-md-8">
+        <h2 class="dot"> . </h2>
+        <h3>Guest Information</h3>
+        <form action="/doCompleteBooking" method="post" class="myForm">
+            <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" value="{{firstName}}" name="firstName" placeholder="Enter your first name" required>
+            </div>
+            <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" value="{{lastName}}" name="lastName" placeholder="Enter your last name" required>
+            </div>
+            <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control" id="phone" value="{{phone}}" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" value="{{email}}" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+            <label for="paymentMethod">Payment Method</label>
+            <input type="text" class="form-control" id="paymentMethod" value="{{paymentMethod}}" name="paymentMethod" placeholder="Enter your payment method" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+        </form>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="bookingInfo">
+            {{!-- <div class="bookingInfo" style="background-color: rgb(110, 110, 110);" > --}}
+                <h3>Booking Information</h3>
+                <h3>{{selectedID}}- {{check_in_date}}-{{check_out_date}}-{{guests}}</h3>
+                <div class="card">
+                    <img src="../imgs/Double Room.jpg" class="room card-img-top" alt="Room Image" style="padding:5%; width: 100%; height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Room Name</h5>
+                        <p class="card-text">Total Price: $100</p>
+                        <p class="card-text">Check-in: May 26, 2023</p>
+                        <p class="card-text">Check-out: May 29, 2023</p>
+                        <p class="card-text">Number of Guests: 2</p>
+                        <p class="card-text">Total Price: $300</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

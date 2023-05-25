@@ -1,0 +1,99 @@
+
+ <section class="hero">
+    <div class="container text-center">
+      <h1>Welcome to Our Hotel</h1>
+      <button type="button" id="bookNowButton" class="btn btn-primary text-center" data-toggle="modal" data-target="#bookingModal">Book Now</button>
+      <h2>Experience Comfort and Luxury</h2>
+      <p>Our hotel offers the finest accommodations, dining options, and amenities for a truly unforgettable stay.</p>
+    </div>
+</section>
+
+<section class="featured-rooms">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="room">
+            <img src="../imgs/Single Room.jpg" alt="Room 1">
+            <h3>Single Room</h3>
+            <p>Cozy and comfortable, our single rooms are perfect for solo travelers or short stays.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="room">
+            <img src="../imgs/Double Room.jpg" alt="Room 2">
+            <h3>Double Room</h3>
+            <p>Spacious and elegant, our double rooms are ideal for couples or small families.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="room">
+            <img src="../imgs/Triple Room.jpg" alt="Room 3">
+            <h3>Triple Room</h3>
+            <p>Experience the pinnacle of luxury in our suites, featuring separate living areas and breathtaking views.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="room">
+            <img src="../imgs/Deluxe Suite.jpg" alt="Room 3">
+            <h3>Deluxe Suite</h3>
+            <p>Experience the pinnacle of luxury in our suites, featuring separate living areas and breathtaking views.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Contact Information</h2>
+          <p><strong>Email:</strong> info@examplehotel.com</p>
+          <p><strong>Phone:</strong> +1 123-456-7890</p>
+        </div>
+        <div class="col-md-6">
+          <h2>Location</h2>
+          <div id="map">
+            <!-- Embed the map using an iframe or Google Maps API -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookingModalLabel">Book Now</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/doCheckAvailability" method="get">
+                <div class="form-group">
+                    <label for="check_in_date">Check-in Date</label>
+                    <input type="date" class="form-control" id="check_in_date" name="check_in_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="check_out_date">Check-out Date</label>
+                    <input type="date" class="form-control" id="check_out_date" name="check_out_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests_count">Guests</label>
+                    <input type="number" class="form-control" id="guests_count" name="guests_count" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests_count">Rooms</label>
+                    <input type="number" class="form-control" id="rooms_count" name="rooms_count" min="1" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Book</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

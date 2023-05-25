@@ -1,0 +1,21 @@
+/* .selectRoomsBack{
+  background-color: #4d4d4d;
+} */
+
+.availability-box {
+    background-color: #e4e4e4;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+.typeName{
+  width: 30%;
+}
+
+.info{
+  width: 40%;
+}
+
+.roomBox{
+  width: 20%;
+}

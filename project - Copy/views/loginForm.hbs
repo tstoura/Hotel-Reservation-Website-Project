@@ -1,0 +1,57 @@
+<form action="/dologin" method="post">
+    <div class="row mt-5">
+        <div class="col-8 offset-2">
+            <h2 class="text-center">Δώστε τα στοιχεία πρόσβασής σας...</h2>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                {{!-- <label class="form-label" for="username">Όνομα χρήστη</label>
+                <input type="text" class="form-control {{#if message.username}} is-invalid {{/if}}"
+                    value="{{message.username.value}}" name="username" id="username" placeholder="Username"
+                    required="required" autofocus>
+                <div class="invalid-feedback">{{message.username.msg}}</div> --}}
+                <label class="form-label" for="username">Username</label>
+                <input type="text" class="form-control"
+                    value="{{username}}" name="username" id="username" placeholder="Username"
+                    required="required" autofocus>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                {{!-- <label class="form-label" for="password">Συνθηματικό</label>
+                <input type="password" class="form-control {{#if message.password}} is-invalid {{/if}}"
+                    value="{{message.password.value}}" name="password" id="password" placeholder="Password"
+                    required="required">                
+                <div class="invalid-feedback">{{message.username.msg}}</div> --}}
+                <label class="form-label" for="password">Password</label>
+                <input type="password" class="form-control"
+                    value="{{password}}" name="password" id="password" placeholder="Password"
+                    required="required">                
+            </div>
+        </div>
+    </div>
+    {{!-- {{#if newusermessage}}
+        <div class="row mt-5">
+            <div class="col-6 offset-3">
+                <div class="alert alert-primary" role="alert">
+                    {{newusermessage}}
+                </div>
+            </div>
+        </div>
+    {{/if}} --}}
+    {{!-- {{#if}} if username = admin & passwrod = admin tote kane submit sto dashboard alliws sto home --}}
+    <div class="row mt-5">
+        <div class="col-6 offset-3">
+            <button type="submit" class="btn btn-primary login-btn btn-block w-100">Login</button>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-6 offset-3 text-center">
+            <a href="/register">Create Account</a>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,41 @@
+<section class="hero">
+    <div class="row mt-5 container text-center">
+      <h1>Welcome to Our Hotel</h1>
+      <button type="button" id="bookNowButton" class="btn btn-primary col-6 offset-3 text-center" data-toggle="modal" data-target="#bookingModal">Book Now</button>
+      <h2>Experience Comfort and Luxury</h2>
+      <p>Our hotel offers the finest accommodations, dining options, and amenities for a truly unforgettable stay.</p>
+    </div>
+  </section>
+
+    <div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">Book Now</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="form-group">
+                        <label for="check_in_date">Check-in Date</label>
+                        <input type="date" class="form-control" id="check_in_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="check_out_date">Check-out Date</label>
+                        <input type="date" class="form-control" id="check_out_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests_count">Number of Guests</label>
+                        <input type="number" class="form-control" id="guests_count" required>
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="/doSelectRoom?check_in_date={{check_in_date}}&check_out_date={{check_out_date}}&guests_count={{guests_count}}" class="btn btn-primary">Book</a>
+                 </div>
+            </div>
+        </div>
+    </div>

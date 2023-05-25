@@ -1,0 +1,14 @@
+.dot{
+    color:white;
+}
+
+.bookingInfo{
+    background-color: rgb(84, 84, 84);
+    padding: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.bookingInfo > h3{
+    color: white;
+}
