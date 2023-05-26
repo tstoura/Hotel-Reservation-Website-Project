@@ -10,7 +10,7 @@ const sequelize = new Sequelize({
     password: process.env.POSTGRES_PASSWORD||'1234',
     database:"HotelRes",
     logging: false,
-    omitNull: true, //na min stelnetai tipota an ta values einai null
+    // omitNull: true, //na min stelnetai tipota an ta values einai null
     define:{
         timestamps:false,
         freezeTableName: true
@@ -18,7 +18,7 @@ const sequelize = new Sequelize({
     
 });
 
-const connectDB= async (sequelize) => {
+const connectDB = async (sequelize) => {
       try {
         await sequelize.authenticate();
         console.log("Connection has been established successfully.");

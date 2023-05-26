@@ -1,5 +1,7 @@
 import * as User from '../models/user-model.mjs' // version 3 with ORM sequelize, postgress
-import * as seqObj from '../models/model.mjs'
+// import * as seqObj from '../models/model.mjs'
+// import faker from 'faker'
+import {Op, Model, DataTypes} from 'sequelize'
 
 const doLogin = async (req, res, next) => {
 
@@ -18,43 +20,11 @@ const doLogin = async (req, res, next) => {
 
 }
 
-// const findAllUsers = async (req, res, next) => {
-//     const users = await seqObj.User.findAll()
-//     const sanitized_users = users.map( entry => entry.dataValues)
-//     req.users = sanitized_users
-//     next()
-// }
-
-
-// const findAllBookings = async (req, res, next) => {
-//     const bookings = await seqObj.Reservation.findAll()
-//     const sanitized_bookings = bookings.map( entry => entry.dataValues)
-//     req.bookings = sanitized_bookings
-//     next()
-// }
-// 
-// const doAddBooking = async (req, res, next) => {
-//     try {
-//         console.log(req.body)
-//         await User.addReservation({
-//             "check_in_date": req.body["check_in_date"],
-//             "check_out_date": req.body["check_out_date"],
-//             "total_price": req.body["total_price"],
-//             "guests_count": req.body["guests_count"],
-//             "paymentMethod": req.body["paymentMethod"],
-//             "UserUserID": req.body["userID"],
-//             "RoomRoomID": req.body["roomID"]
-//         })
-//         next()
-//     } catch(error){
-//         next(error)
-//     }
-// }
-
 const doRegister = async (req, res, next) => {
 
     try {
         await User.addUser({
+            // "userID": faker.random.uuid(),
             "username": req.body["username"],
             "password": req.body["password"],
             "firstName":req.body["firstName"],
@@ -70,20 +40,18 @@ const doRegister = async (req, res, next) => {
 }
 
 
-// const doLogout = (req, res, next) => {
-//     req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
-//     next()
-// }
+const doLogout = (req, res, next) => {
+    req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
+    next()
+}
 
-// function checkIfAuthenticated(req, res, next) {
-//     if (req.session.username) { //αν έχει τεθεί η μεταβλητή στο session store θεωρούμε πως ο χρήστης είναι συνδεδεμένος
-//         res.locals.username = req.session.username
-//         next() //επόμενο middleware
-//     }
-//     else
-//         res.redirect("/") //αλλιώς ανακατεύθυνση στην αρχική σελίδα
-// }
+function checkIfAuthenticated(req, res, next) {
+    if (req.session.username) { //αν έχει τεθεί η μεταβλητή στο session store θεωρούμε πως ο χρήστης είναι συνδεδεμένος
+        res.locals.username = req.session.username
+        next() //επόμενο middleware
+    }
+    else
+        res.redirect("/") //αλλιώς ανακατεύθυνση στην αρχική σελίδα
+}
 
-// export { checkIfAuthenticated, doLogin, doRegister, doLogout }
-
-export { doRegister, doLogin }
+export { doRegister, doLogin, checkIfAuthenticated, doLogout}

@@ -90,4 +90,8 @@ const adminDeleteBooking = async(req, res, next) => {
     }
 }
 
-export{findAllUsers, adminDoAddUser, adminDeleteUser, findAllBookings, adminDoAddBooking, adminDeleteBooking}
+const checkIfAuthenticatedAdmin = async(req, res, next) => {
+    
+}
+
+export{findAllUsers, adminDoAddUser, adminDeleteUser, findAllBookings, adminDoAddBooking, adminDeleteBooking, checkIfAuthenticatedAdmin}

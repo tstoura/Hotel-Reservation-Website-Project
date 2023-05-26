@@ -3,26 +3,43 @@ import express from 'express'
 import * as ResController from './controller/reservation-controller.mjs'
 import * as UserController from './controller/user-controller.mjs'
 import * as AdminController from './controller/admin-controller.mjs'
+import {createdata} from "./models/data.mjs"
 
 const router = express.Router()
 
 router.get("/",(req, res) => {
+    createdata()
     res.redirect("/home")
 })
 
+//------------Nav-Bar links------------//
 router.get("/home",(req, res)=>{
     res.render("home")
 })
 
-//register-login
+router.get("/roomsGalery",(req, res)=>{
+    res.render("roomsGalery")
+})
+
+router.get("/services",(req, res)=>{
+    res.render("services")
+})
+
+router.get("/reviews",(req, res)=>{
+    res.render("reviews")
+})
+
+//------------register-login------------//
 router.get("/register", (req, res) => {
     res.render("registrationForm")
 })
 
 router.post("/doregister",
     UserController.doRegister,
+    UserController.doLogin,
     (req, res) => {
-        res.redirect("/home")}
+        // res.render("home", {username: req.session.username})}
+        res.render("home", { username: req.body.username })}
 )
 
 router.get("/login", (req, res) => {
@@ -32,76 +49,75 @@ router.get("/login", (req, res) => {
 router.post("/dologin",
     UserController.doLogin,
     (req, res) => {
-        if(req.body.username == 'admin' && req.body.password == 'admin'){
-            res.render("admin", {username: req.body.username})
-        }
-        else{
-            res.render("home",{username: req.body.username})
-        }
+        // res.render("home",{username = req.session.username})
+        res.render("home", { username: req.body.username })
     }
 )
-
-
-router.get("/logout", (req, res) => {
-    res.render("home")
-})
 
 // router.get("/logout", UserController.doLogout, (req, res) => {
 //     // req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
 //     res.redirect("/")
 // })
 
-//reservation scenario
+
+//------------------------------------------//
+// router.post("/dologin",
+//     UserController.doLogin,
+//     (req, res) => {
+//         if(req.body.username == 'admin' && req.body.password == 'admin'){
+//             res.render("admin", {username: req.body.username})
+//         }
+//         else{
+//             res.render("home",{username: req.body.username})
+//         }
+//     }
+// )
+
+// proswrino
+router.get("/logout", (req, res) => {
+    res.render("home")
+})
+
+
+//------------doReservation------------//
 router.get("/bookNow", (req, res) => {
     res.render("bookingForm")
 })
 
-// router.post("/bookNow",ResController.addReservation,(req, res) => {//   
-//     res.redirect("/")})
-// router.post("/bookNow",(req, res) => {   
-//     console.log("data: ", req.body.check_in_date,req.body.check_out_date,req.body.guests_count) 
-//     res.render("selectRoom", {
-//         check_in_date: req.body.check_in_date,
-//         check_out_date: req.body.check_out_date,
-//         guests: req.body.guests_count
-//     })
-// })
+router.get("/doCheckAvailability",ResController.availableRooms)
 
-//for NOT WORKING //den pairnei tis times
-router.get("/doSelectRoom",ResController.createDB,ResController.availableRooms)
-
-//NOT WORKING
-// router.get("/doSelectRoom", (req, res) => {
-//     console.log(req.query.check_in_date, req.query.check_out_date, req.query.guests_count);
-//     res.render("selectRoom",{check_in_date: req.query.check_in_date,
-//         check_out_date: req.query.check_out_date,
-//         guests: req.query.guests_count})
-// })
-// router.get("/selectRoom", (req, res) => {
-// });
-
-router.get("/bookRoom",(req,res)=>{
-    const RoomID = req.query.roomID
-    console.log("RoomID: ", RoomID)
-    //ektos tou roomID pernaw kai to posa dwmatia (input sthn sel selectRoom)
-    res.render("userDataBooking",{selectedID:RoomID})
+router.get("/doBookRoom",(req,res)=>{
+    const typeRoomID = req.query.roomTypeID
+    const check_in_date = req.query.check_in_date
+    const check_out_date = req.query.check_out_date
+    const guests = req.query.guests
+    const rooms = req.query.rooms_count
+    const totalPrice = req.query.totalPrice
+    // console.log("check_in_date klp: ",check_in_date,check_out_date,guests)
+    console.log("query: ",req.query)
+    res.render("userDataBooking",
+    {selectedID:typeRoomID,
+    check_in_date:check_in_date,
+    check_out_date:check_out_date,
+    guests:guests,
+    roomsNum:rooms,
+    totalPrice: totalPrice})
 })
 
 router.post("/doCompleteBooking", (req,res)=>{
     const roomID = req.body.selectedID
-    console.log("roomID: ", roomID,"userInfo: ",req.body.firstName," " ,req.body.lastName," " ,req.body.email," " ,req.body.phone," " ,req.body.paymentMethod)
+    console.log("roomID: ", roomID ,"userInfo: ",req.body.firstName," " ,req.body.lastName," " ,req.body.email," " ,req.body.phone," " ,req.body.paymentMethod)
     //den briskei to roomID. akoma prepei na perasw check_in/check_out)
     //kai pernaw ta dedomena tou xrhsth->kalw synarthsh pou pairnei ta stoixeia apo prin
     //(plhrof room apo to id kai posa dwmatia +stoixeia xrhsth +ypologismoi tot price kai kanei eggrafh sto Reservation)
     // res.render("/completeBoooking",{roomID:roomID})
-    res.render("doCompleteBooking",{})
 })
-
-router.get("/userDataBooking")
 
 //admin!
 //show, add & delete users (add not completed)
-router.get("/adminShowUsers", AdminController.findAllUsers, 
+router.get("/adminShowUsers", 
+    // , AdminController.checkIfAuthenticatedAdmin !! 
+    AdminController.findAllUsers, 
     (req,res) => {
     res.render("adminShowUsers", {users: req.users})
 })
@@ -115,7 +131,7 @@ router.post("/adminDoAddUser",
     AdminController.findAllUsers,
     (req, res) => {
         console.log(req.body),
-        res.render("adminShowUsers", {users: req.users} ,{message: req.message})
+        res.render("adminShowUsers", { message: req.message, users: req.users })
     }
 )
 
@@ -138,10 +154,12 @@ router.get("/adminAddBooking", (req, res) => {
 
 router.post("/adminDoAddBooking", 
     AdminController.adminDoAddBooking,
+    AdminController.findAllBookings,
     (req, res) => {
-        res.render("adminResTemplate", {message: req.message})
+        res.render("adminShowBookings",{ message:req.message, bookings:req.bookings })
     }
 )
+
 router.get("/adminDeleteBooking", 
     AdminController.adminDeleteBooking,
     AdminController.findAllBookings, 
