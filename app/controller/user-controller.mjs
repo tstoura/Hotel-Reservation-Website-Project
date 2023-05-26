@@ -24,7 +24,6 @@ const doRegister = async (req, res, next) => {
 
     try {
         await User.addUser({
-            // "userID": faker.random.uuid(),
             "username": req.body["username"],
             "password": req.body["password"],
             "firstName":req.body["firstName"],
@@ -48,10 +47,10 @@ const doLogout = (req, res, next) => {
 function checkIfAuthenticated(req, res, next) {
     if (req.session.username) { //αν έχει τεθεί η μεταβλητή στο session store θεωρούμε πως ο χρήστης είναι συνδεδεμένος
         res.locals.username = req.session.username
-        next() //επόμενο middleware
     }
-    else
-        res.redirect("/") //αλλιώς ανακατεύθυνση στην αρχική σελίδα
+    next() //επόμενο middleware
+    // else
+    //     res.redirect("/") //αλλιώς ανακατεύθυνση στην αρχική σελίδα
 }
 
 export { doRegister, doLogin, checkIfAuthenticated, doLogout}

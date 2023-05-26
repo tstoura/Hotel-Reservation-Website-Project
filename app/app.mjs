@@ -10,7 +10,7 @@ const MemoryStore = createMemoryStore(session) //dimiourgoume enan constructor g
 // me antikeimeno tin sinedria mas (session)
 
 const HotelResSession = session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || '05afd00f3d330e4e1c10ca0227de6c29241dd2aa7495601ab53354722f5558ca',
     store: new MemoryStore({ checkPeriod: 86400 * 1000 }), //ana 24 wres o server mas tha svinei tis sinedries pou exoun liksei
     //(an leitourgei 24 wres)
     resave: false,

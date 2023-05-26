@@ -20,17 +20,19 @@ const adminDoAddUser = async (req, res, next) => {
             "firstName": req.body["firstName"],
             "lastName": req.body["lastName"],
             "email":req.body["email"],
-            "gender": female, //prosorino!!
+            "gender": "female", //prosorino!!
             "nationality": "Greek", //prosorino!
             "address": req.body["address"],
             "phone_number": req.body["phone_number"],
             "role": "member",
         })
         console.log("perase")
-        req.message = 'User Added!'
+        res.locals.message = 'User Added!'
+        // req.message = 'User Added!'
         next()
     } catch(error){
-        req.message = 'Failed to add User!'
+            res.locals.message = 'Failed to add User'
+        // req.message = 'Failed to add User!'
     }
 }
 
@@ -90,8 +92,13 @@ const adminDeleteBooking = async(req, res, next) => {
     }
 }
 
-const checkIfAuthenticatedAdmin = async(req, res, next) => {
-    
+const checkIfAuthenticatedAdmin = async(req, res, next) => { //dinoume access ston admin gia tis selides tou
+    if(req.session.username === 'admin'){
+        next()
+    }
+    else{
+        res.render("error", {message: "Wrong Credentials, access denied!"})
+    }
 }
 
 export{findAllUsers, adminDoAddUser, adminDeleteUser, findAllBookings, adminDoAddBooking, adminDeleteBooking, checkIfAuthenticatedAdmin}

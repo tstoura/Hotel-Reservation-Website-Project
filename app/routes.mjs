@@ -7,25 +7,34 @@ import {createdata} from "./models/data.mjs"
 
 const router = express.Router()
 
+createdata()
+
 router.get("/",(req, res) => {
-    createdata()
+    UserController.checkIfAuthenticated,
     res.redirect("/home")
 })
 
 //------------Nav-Bar links------------//
-router.get("/home",(req, res)=>{
+router.get("/home", UserController.checkIfAuthenticated,
+    (req, res)=>{
     res.render("home")
 })
 
-router.get("/roomsGalery",(req, res)=>{
-    res.render("roomsGalery")
+router.get("/roomsGallery",
+    UserController.checkIfAuthenticated,
+    (req, res)=>{
+    res.render("roomsGallery")
 })
 
-router.get("/services",(req, res)=>{
+router.get("/services",
+    UserController.checkIfAuthenticated,
+    (req, res)=>{
     res.render("services")
 })
 
-router.get("/reviews",(req, res)=>{
+router.get("/reviews",
+    UserController.checkIfAuthenticated,
+    (req, res)=>{
     res.render("reviews")
 })
 
@@ -36,10 +45,10 @@ router.get("/register", (req, res) => {
 
 router.post("/doregister",
     UserController.doRegister,
-    UserController.doLogin,
     (req, res) => {
-        // res.render("home", {username: req.session.username})}
-        res.render("home", { username: req.body.username })}
+        req.session.username = req.body.username
+        res.locals.username = req.session.username
+        res.render("home")}
 )
 
 router.get("/login", (req, res) => {
@@ -49,34 +58,28 @@ router.get("/login", (req, res) => {
 router.post("/dologin",
     UserController.doLogin,
     (req, res) => {
+        req.session.username = req.body.username
+        res.locals.username = req.session.username
+        if(req.session.username === 'admin'){
+            res.render("admin")
+        }
         // res.render("home",{username = req.session.username})
-        res.render("home", { username: req.body.username })
+        res.render("home")
     }
 )
 
-// router.get("/logout", UserController.doLogout, (req, res) => {
-//     // req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
-//     res.redirect("/")
-// })
+router.get("/logout", UserController.doLogout, (req, res) => {
+    // req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
+    res.redirect("/")
+})
 
 
 //------------------------------------------//
-// router.post("/dologin",
-//     UserController.doLogin,
-//     (req, res) => {
-//         if(req.body.username == 'admin' && req.body.password == 'admin'){
-//             res.render("admin", {username: req.body.username})
-//         }
-//         else{
-//             res.render("home",{username: req.body.username})
-//         }
-//     }
-// )
 
-// proswrino
-router.get("/logout", (req, res) => {
-    res.render("home")
-})
+// router.get("/logout", (req, res) => {
+//     UserController.checkIfAuthenticated,
+//     res.render("home")
+// })
 
 
 //------------doReservation------------//
@@ -116,17 +119,22 @@ router.post("/doCompleteBooking", (req,res)=>{
 //admin!
 //show, add & delete users (add not completed)
 router.get("/adminShowUsers", 
-    // , AdminController.checkIfAuthenticatedAdmin !! 
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,  
     AdminController.findAllUsers, 
     (req,res) => {
     res.render("adminShowUsers", {users: req.users})
 })
 
 router.get("/adminAddUser", (req, res) => {
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,
     res.render("adminAddUser")
 })
 
 router.post("/adminDoAddUser",
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,
     AdminController.adminDoAddUser,
     AdminController.findAllUsers,
     (req, res) => {
@@ -135,7 +143,9 @@ router.post("/adminDoAddUser",
     }
 )
 
-router.get("/adminDeleteUser", 
+router.get("/adminDeleteUser",
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,
     AdminController.adminDeleteUser,
     AdminController.findAllUsers, 
     (req,res) => {
@@ -143,16 +153,23 @@ router.get("/adminDeleteUser",
 })
 
 //show, add & delete bookings
-router.get("/adminShowBookings", AdminController.findAllBookings, 
+router.get("/adminShowBookings",
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,
+    AdminController.findAllBookings, 
     (req,res) => {
     res.render("adminShowBookings", {bookings: req.bookings})
 })
 
 router.get("/adminAddBooking", (req, res) => {
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,
     res.render("adminAddBooking")
 })
 
-router.post("/adminDoAddBooking", 
+router.post("/adminDoAddBooking",
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,
     AdminController.adminDoAddBooking,
     AdminController.findAllBookings,
     (req, res) => {
@@ -160,7 +177,9 @@ router.post("/adminDoAddBooking",
     }
 )
 
-router.get("/adminDeleteBooking", 
+router.get("/adminDeleteBooking",
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,
     AdminController.adminDeleteBooking,
     AdminController.findAllBookings, 
     (req,res) => {

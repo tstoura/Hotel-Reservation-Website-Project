@@ -5,17 +5,34 @@ import bcrypt from "bcrypt"
 
 
 // Users
-function generateUsers(numUsers) {
+async function generateUsers(numUsers) {
     const users = [];
+    
+    const hash = await bcrypt.hash('admin', 10)
+    const pass = hash
 
-    // users.push({userID: -1,
-    //   username: 'admin',
-    //   password: 'admin',
-    //   firstName: faker.name.findName(),
-    //   lastName: faker.name.lastName(),
-    //   email: faker.internet.email(),
-    //   phone_number: faker.phone.phoneNumber(),
-    //   role:"admin"})
+    users.push({userID: -1,
+      username: 'admin',
+      password: pass,
+      firstName: faker.name.findName(),
+      lastName: faker.name.lastName(),
+      email: faker.internet.email(),
+      phone_number: faker.phone.phoneNumber(),
+      role:"admin"})
+
+    // for (let i = 0; i < numUsers; i++) {
+    //   const user = { 
+    //     username: faker.internet.userName(),
+    //     password: faker.internet.password(),
+    //     firstName: faker.name.findName(),
+    //     lastName: faker.name.lastName(),
+    //     email: faker.internet.email(),
+    //     phone_number: faker.phone.phoneNumber(),
+    //     role:"member"
+    //   }
+    //   users.push(user)
+    // }
+   
 
     for (let i = 0; i < numUsers; i++) {
         const user = {
@@ -52,9 +69,9 @@ function generateBookingDate(checkInDate,Pmathod,userID) {
 
 function generateBookings(numBookings, users) {
 const bookings = []
-const userID = [users[0].dataValues.userID,users[0].dataValues.userID,users[1].dataValues.userID,users[1].dataValues.userID,users[2].dataValues.userID,users[2].dataValues.userID,users[3].dataValues.userID,users[4].dataValues.userID]
+const userID = [users[1].dataValues.userID,users[1].dataValues.userID,users[2].dataValues.userID,users[2].dataValues.userID,users[3].dataValues.userID,users[3].dataValues.userID,users[4].dataValues.userID,users[4].dataValues.userID]
 
-for (let i = 0; i < numBookings-2; i++) {
+for (let i = 1; i < numBookings-2; i++) {
     const checkInDate = faker.date.future()
     const booking = generateBookingDate(checkInDate,"card",userID[i])
     bookings.push(booking)
@@ -221,7 +238,7 @@ async function createdata(){
   // Generate users
   if (userData===0){
     const numUsers = 5 
-    const users = generateUsers(numUsers)
+    const users = await generateUsers(numUsers)
     await User.bulkCreate(users)    
   }
 
