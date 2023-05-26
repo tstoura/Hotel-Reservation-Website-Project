@@ -36,8 +36,9 @@ router.get("/register", (req, res) => {
 
 router.post("/doregister",
     UserController.doRegister,
+    UserController.doLogin,
     (req, res) => {
-        res.redirect("/home")}
+        res.redirect("/home", {username: req.body.username})}
 )
 
 router.get("/login", (req, res) => {

@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
     port:5432,
     dialect:'postgres',
     username: process.env.POSTGRES_USERNAME|| 'postgres',
-    password: process.env.POSTGRES_PASSWORD||'Thanou1098!',
+    password: process.env.POSTGRES_PASSWORD||'1234',
     database:"HotelRes",
     logging: false,
     define:{
