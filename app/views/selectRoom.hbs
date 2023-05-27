@@ -61,9 +61,18 @@
           </tr>
           {{/if}}
           {{/each}}
-          <td>
-              <a class="btn btn-sm btn-secondary" id="bookAll" href="/doBookRoom?check_in_date={{check_in_date}}&check_out_date={{check_out_date}}&guests={{guests}}">Book</a>
+
+          {{#if username}}
+           <td>
+              <a class="btn btn-sm btn-secondary" id="bookAll" href="/doBookRoom?check_in_date={{check_in_date}}&check_out_date={{check_out_date}}&guests={{guests}}&firstName={{firstName}}&lastName={{lastName}}&phone_number={{phone_number}}&email={{email}}">Book</a>
           </td>
+          {{/if}}
+          {{#unless username}}
+            <td>
+              <a class="btn btn-sm btn-secondary" id="bookAll" href="/doBookRoom?check_in_date={{check_in_date}}&check_out_date={{check_out_date}}&guests={{guests}}">Book</a>
+            </td>
+          {{/unless}}
+        
         </tbody>
       </table>
     </div>

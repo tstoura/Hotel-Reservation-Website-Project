@@ -107,19 +107,16 @@ router.get("/doBookRoom",
     // let totalPrice = calculateTotalPrice()
     let roomsCount = 0
     let totalPrice = 0
-    for (let i=0;i<roomsCountArray.length;i++){
-        roomsCount+=(roomsCountArray[i])/1
-        totalPrice+=(roomsCountArray[i]*priceForOneArray[i])/1
+    if( roomsCountArray.length > 1 ){
+        for (let i=0;i<roomsCountArray.length;i++){
+        roomsCount+=parseInt(roomsCountArray[i])
+        totalPrice+=parseInt(roomsCountArray[i]*priceForOneArray[i])
+        }
     }
-    
-    // if(res.locals.username == res.session.username){
-    //     res.locals.selectedID = res.session.roomTypeID,
-    //     res.locals.checkInDate = res.session.checkInDate,
-    //     res.locals.checkOutDate = res.session.checkOutDate,
-    //     res.locals.guests = res.session.guests,
-    //     res.locals.rooms = res.session.roomCount,
-
-    // }
+    else{
+        roomsCount = roomsCountArray
+        totalPrice = priceForOneArray  
+    }
 
     res.render("userDataBooking", {
         selectedID: roomTypeID,
@@ -129,6 +126,10 @@ router.get("/doBookRoom",
         rooms: roomsCount,
         totalPrice: totalPrice,
         roomsCountArray: roomsCountArray,
+        firstName: req.query.firstName,
+        lastName: req.query.lastName,
+        phone_number: req.query.phone_number,
+        email: req.query.email
       })
   })
 

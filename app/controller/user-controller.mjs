@@ -46,13 +46,13 @@ const doLogout = (req, res, next) => {
 function checkIfAuthenticated(req, res, next) {
     if (req.session.username) { //αν έχει τεθεί η μεταβλητή στο session store θεωρούμε πως ο χρήστης είναι συνδεδεμένος
         res.locals.username = req.session.username
-        res.locals.firstName = req.session.firstName
-        res.locals.lastName = req.session.lastName
-        res.locals.phone_number = req.session.phone_number
-        res.locals.email = req.session.email
+        // res.locals.firstName = req.session.firstName
+        // res.locals.lastName = req.session.lastName
+        // res.locals.phone_number = req.session.phone_number
+        // res.locals.email = req.session.email
     }
     console.log(req.session)
     next() //επόμενο middleware
 }
 
-export { doRegister, doLogin, checkIfAuthenticated, doLogout}
+export { doRegister, doLogin, checkIfAuthenticated, doLogout }

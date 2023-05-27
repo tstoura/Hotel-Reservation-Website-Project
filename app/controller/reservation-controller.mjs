@@ -1,5 +1,6 @@
 import * as Reservation from "../models/reservation-model.mjs"
 import * as User from "../models/user-model.mjs"
+import * as seqObj from '../models/model.mjs'
 
 const doAddReservation = async (req,res,next)=>{
     try {
@@ -83,15 +84,34 @@ const availableRooms = async (req,res,next)=>{
 
         //roomTypes and their info
         // console.log("CONTROLLER: ", roomTypes)
-
-        res.render("selectRoom", {
-            check_in_date: req.query.check_in_date,
-            check_out_date: req.query.check_out_date,
-            guests: req.query.guests_count,
-            rooms: req.query.rooms_count,
-            Avrooms: Avrooms,
-            roomTypes: roomTypes 
-        })
+        if(req.session.username){ //an o xristis exei logariasmo kai einai sindedemenos
+        //pername sto selectRoom kai ta stoixeia tou xrhsth pou xreiazetai h forma, wste na einai automata
+        //simplirwmena
+        const user = await seqObj.User.findOne({where: {username : req.session.username}})
+            res.render("selectRoom", {
+                check_in_date: req.query.check_in_date,
+                check_out_date: req.query.check_out_date,
+                guests: req.query.guests_count,
+                rooms: req.query.rooms_count,
+                Avrooms: Avrooms,
+                roomTypes: roomTypes,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                phone_number: user.phone_number,
+                email: user.email
+            })
+        }
+        else{
+            res.render("selectRoom", {
+                check_in_date: req.query.check_in_date,
+                check_out_date: req.query.check_out_date,
+                guests: req.query.guests_count,
+                rooms: req.query.rooms_count,
+                Avrooms: Avrooms,
+                roomTypes: roomTypes 
+            })
+        }
+       
         
     }
     catch (error) {

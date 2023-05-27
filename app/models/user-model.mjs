@@ -14,7 +14,7 @@ import bcrypt from "bcrypt"
 
 async function addUser(newUser){
     try{
-
+        
         if (! newUser.username || ! newUser.password)  
         throw new Error("Missing username or password")
 

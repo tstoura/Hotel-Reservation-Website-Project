@@ -2,7 +2,6 @@ import * as Admin from '../models/admin-model.mjs' // version 3 with ORM sequeli
 import * as seqObj from '../models/model.mjs'
 
 
-
 const findAllUsers = async (req, res, next) => {
     const users = await seqObj.User.findAll()
     const sanitized_users = users.map( entry => entry.dataValues)
@@ -24,7 +23,6 @@ const adminDoAddUser = async (req, res, next) => {
             "nationality": "Greek", //prosorino!
             "address": req.body["address"],
             "phone_number": req.body["phone_number"],
-            "role": "member",
         })
         console.log("perase")
         res.locals.message = 'User Added!'

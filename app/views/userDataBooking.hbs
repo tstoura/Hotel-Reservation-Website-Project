@@ -4,7 +4,7 @@
         {{!-- <h2 class="dot">.</h2> --}}
         <h3>Guest's Information</h3>
         <form action="/doCompleteBooking" method="post" class="myForm">
-        {{#if username}}
+        
             <div class="form-group">
             <label for="firstName">First Name</label>
             <input type="text" class="form-control" id="firstName" value="{{firstName}}" name="firstName" placeholder="Enter your first name" required>
@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="tel" class="form-control" id="phone" value="{{phone}}" name="phone" placeholder="Enter your phone number" required>
+            <input type="tel" class="form-control" id="phone" value="{{phone_number}}" name="phone" placeholder="Enter your phone number" required>
             </div>
             <div class="form-group">
             <label for="email">Email</label>
@@ -37,7 +37,7 @@
             <button type="submit" class="btn btn-secondary">Confirm</button>
         </form>
         </div>
-        {{/if}}
+
         <div class="col-md-4">
             <div class="bookingInfo">
                 <h3>Booking Information</h3>
