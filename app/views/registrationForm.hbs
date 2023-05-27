@@ -1,14 +1,14 @@
 <form action="/doregister" method="post">
     <div class="row mt-5">
         <div class="col-8 offset-2">
-            <h2 class="text-center">Δημιουργία Λογαριασμού</h2>
+            <h2 class="text-center">Create Account</h2>
         </div>
     </div><div class="row mt-1">
         <div class="col-6 offset-3">
             <div class="form-floating">
-                <label class="form-label" for="firstName">Όνομα</label>
+                <label class="form-label" for="firstName">First Name</label>
                 <input type="text" class="form-control "
-                    value="{{firstName}}" name="firstName" id="firstName" placeholder="Όνομα"
+                    value="{{firstName}}" name="firstName" id="firstName" placeholder="First Name"
                     required="required" autofocus>                
             </div>
         </div>
@@ -16,9 +16,9 @@
     <div class="row mt-1">
         <div class="col-6 offset-3">
             <div class="form-floating">
-                <label class="form-label" for="lastName">Επίθετο</label>
+                <label class="form-label" for="lastName">Last Name</label>
                 <input type="text" class="form-control "
-                    value="{{lastName}}" name="lastName" id="lastName" placeholder="Επίθετο"
+                    value="{{lastName}}" name="lastName" id="lastName" placeholder="Last Name"
                     required="required" autofocus>                
             </div>
         </div>
@@ -31,9 +31,9 @@
                     required="required" autofocus>
                 <label class="form-label" for="form-username">Όνομα χρήστη</label>
                 <div class="invalid-feedback">{{message.username.msg}}</div> --}}
-                <label class="form-label" for="username">Όνομα χρήστη</label>
+                <label class="form-label" for="username">Username</label>
                 <input type="text" class="form-control "
-                    value="{{username}}" name="username" id="username" placeholder="Όνομα χρήστη"
+                    value="{{username}}" name="username" id="username" placeholder="Username"
                     required="required" autofocus>
             </div>
         </div>
@@ -45,9 +45,9 @@
                     name="password" id="password" placeholder="Συνθηματικό" required="required">
                 <label class="form-label" for="password">Συνθηματικό</label>
                 <div class="invalid-feedback">{{message.password.msg}}</div> --}}
-                <label class="form-label" for="password">Συνθηματικό</label>
+                <label class="form-label" for="password">Password</label>
                 <input type="password" class="form-control " value=""
-                    name="password" id="password" placeholder="Συνθηματικό" required="required">                
+                    name="password" id="password" placeholder="Password" required="required">                
             </div>
         </div>
     </div>
@@ -59,9 +59,9 @@
                     required="required">
                 <label class="form-label" for="password">Επιβεβαίωση συνθηματικού</label>
                 <div class="invalid-feedback">{{message.password-confirm.msg}}</div> --}}
-                <label class="form-label" for="password-confirm">Επιβεβαίωση συνθηματικού</label>
+                <label class="form-label" for="password-confirm">Confirm Password</label>
                 <input type="password" class="form-control " value=""
-                    name="password-confirm" id="password-confirm" placeholder="Επιβεβαίωση συνθηματικού"
+                    name="password-confirm" id="password-confirm" placeholder="Confirm Password"
                     required="required">                
             </div>
         </div>
@@ -79,9 +79,9 @@
     <div class="row mt-1">
         <div class="col-6 offset-3">
             <div class="form-floating">
-                <label class="form-label" for="phone">Τηλέφωνο Επικοινωνίας</label>
+                <label class="form-label" for="phone">Phone Number</label>
                 <input type="text" class="form-control "
-                    value="{{phone}}" name="phone" id="phone" placeholder="Τηλέφωνο Επικοινωνίας"
+                    value="{{phone}}" name="phone" id="phone" placeholder="Phone Number"
                     required="required" autofocus>
 
             </div>
@@ -98,7 +98,7 @@
     {{/if}} --}}
     <div class="row mt-5">
         <div class="col-6 offset-3">
-            <button type="submit" class="btn btn-primary login-btn btn-block w-100">Register</button>
+            <button type="submit" class="btn btn-secondary login-btn btn-block w-100">Register</button>
         </div>
     </div>
     <div class="row mt-5">

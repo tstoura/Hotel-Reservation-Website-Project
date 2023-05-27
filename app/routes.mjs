@@ -68,8 +68,8 @@ router.post("/dologin",
     }
 )
 
-router.get("/logout", UserController.doLogout, (req, res) => {
-    // req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
+router.get("/logout", UserController.doLogout, 
+    (req, res) => {
     res.redirect("/")
 })
 
@@ -87,36 +87,59 @@ router.get("/bookNow", (req, res) => {
     res.render("bookingForm")
 })
 
-router.get("/doCheckAvailability",ResController.availableRooms)
+router.get("/doCheckAvailability", 
+UserController.checkIfAuthenticated,
+ResController.availableRooms)
 
-router.get("/doBookRoom",(req,res)=>{
-    const typeRoomID = req.query.roomTypeID
-    const check_in_date = req.query.check_in_date
-    const check_out_date = req.query.check_out_date
+
+router.get("/doBookRoom",
+    UserController.checkIfAuthenticated,
+    (req, res) => {
+    console.log("req.query: ",req.query)
+    const roomTypeID = req.query.roomTypeID
+    const checkInDate = req.query.check_in_date
+    const checkOutDate = req.query.check_out_date
     const guests = req.query.guests
-    const rooms = req.query.rooms_count
-    const totalPrice = req.query.totalPrice
-    // console.log("check_in_date klp: ",check_in_date,check_out_date,guests)
-    console.log("query: ",req.query)
-    res.render("userDataBooking",
-    {selectedID:typeRoomID,
-    check_in_date:check_in_date,
-    check_out_date:check_out_date,
-    guests:guests,
-    roomsNum:rooms,
-    totalPrice: totalPrice})
+    const roomsCountArray = req.query.roomsCount
+    const priceForOneArray = req.query.price
+    
+
+    // let totalPrice = calculateTotalPrice()
+    let roomsCount = 0
+    let totalPrice = 0
+    for (let i=0;i<roomsCountArray.length;i++){
+        roomsCount+=(roomsCountArray[i])/1
+        totalPrice+=(roomsCountArray[i]*priceForOneArray[i])/1
+    }
+    
+    // if(res.locals.username == res.session.username){
+    //     res.locals.selectedID = res.session.roomTypeID,
+    //     res.locals.checkInDate = res.session.checkInDate,
+    //     res.locals.checkOutDate = res.session.checkOutDate,
+    //     res.locals.guests = res.session.guests,
+    //     res.locals.rooms = res.session.roomCount,
+
+    // }
+
+    res.render("userDataBooking", {
+        selectedID: roomTypeID,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+        guests: guests,
+        rooms: roomsCount,
+        totalPrice: totalPrice,
+        roomsCountArray: roomsCountArray,
+      })
+  })
+
+
+router.post("/doCompleteBooking", 
+    UserController.checkIfAuthenticated,
+    ResController.doAddReservation,(req,res)=>{
+    res.render("completeBooking")
 })
 
-router.post("/doCompleteBooking", (req,res)=>{
-    const roomID = req.body.selectedID
-    console.log("roomID: ", roomID ,"userInfo: ",req.body.firstName," " ,req.body.lastName," " ,req.body.email," " ,req.body.phone," " ,req.body.paymentMethod)
-    //den briskei to roomID. akoma prepei na perasw check_in/check_out)
-    //kai pernaw ta dedomena tou xrhsth->kalw synarthsh pou pairnei ta stoixeia apo prin
-    //(plhrof room apo to id kai posa dwmatia +stoixeia xrhsth +ypologismoi tot price kai kanei eggrafh sto Reservation)
-    // res.render("/completeBoooking",{roomID:roomID})
-})
-
-//admin!
+//----------Admin----------//
 //show, add & delete users (add not completed)
 router.get("/adminShowUsers", 
     UserController.checkIfAuthenticated,
@@ -186,5 +209,11 @@ router.get("/adminDeleteBooking",
     res.render("adminShowBookings", {bookings: req.bookings})
 })
 
+router.get("/profile",
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin, 
+    (req,res) => {
+    res.render("admin")
+})
 
 export {router}

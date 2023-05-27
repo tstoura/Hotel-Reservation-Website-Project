@@ -1,61 +1,59 @@
-<form action="/doCompleteBooking" method="post" class="myForm">
-    <div class="container">
-        <div class="row mt-5">
-            <div class="col-12">
-                <h3>{{selectedID}}</h3>
+<div class="container">
+    <div class="row">        
+        <div class="col-md-8">
+        {{!-- <h2 class="dot">.</h2> --}}
+        <h3>Guest's Information</h3>
+        <form action="/doCompleteBooking" method="post" class="myForm">
+        {{#if username}}
+            <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" value="{{firstName}}" name="firstName" placeholder="Enter your first name" required>
             </div>
+            <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" value="{{lastName}}" name="lastName" placeholder="Enter your last name" required>
+            </div>
+            <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control" id="phone" value="{{phone}}" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" value="{{email}}" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+            <label for="paymentMethod">Payment Method</label>
+            <input type="text" class="form-control" id="paymentMethod" value="{{paymentMethod}}" name="paymentMethod" placeholder="Enter your payment method" required>
+            </div>
+
+            <input type="hidden" name="roomTypesID" value="{{selectedID}}">
+            <input type="hidden" name="roomsCount" value="{{roomsCountArray}}">
+            <input type="hidden" name="check_in_date" value="{{checkInDate}}">
+            <input type="hidden" name="check_out_date" value="{{checkOutDate}}">
+            <input type="hidden" name="guests" value="{{guests}}">
+            <input type="hidden" name="rooms" value="{{rooms}}">
+            <input type="hidden" name="totalPrice" value="{{totalPrice}}">
+
+            <button type="submit" class="btn btn-secondary">Confirm</button>
+        </form>
         </div>
-        <fieldset class="border p-2 mb-3">
-            <legend class="w-auto">Guest Information</legend>
-            <div class="row mb-3">
-                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
-                    <label for="firstName" class="col-form-label">First Name</label>
+        {{/if}}
+        <div class="col-md-4">
+            <div class="bookingInfo">
+                <h3>Booking Information</h3>
+                <h3>{{selectedID}}</h3>
+                <div class="card">
+                    <img src="../imgs/Double Room.jpg" class="room card-img-top" alt="Room Image" style="padding:5%; width: 100%; height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Room Name</h5>
+                        <p class="card-text">Check-in: {{checkInDate}}</p>
+                        <p class="card-text">Check-out: {{checkOutDate}}</p>
+                        <p class="card-text">Number of Guests: {{guests}}</p>
+                        <p class="card-text">Number of Rooms: {{rooms}}</p>
+                        <p class="card-text">Total Price: €{{totalPrice}}</p>
+                    </div>
                 </div>
-                <div class="col-md-10 col-sm-10">
-                    <input type="text" class="form-control" id="firstName" value="{{firstName}}" name="firstName" placeholder="firstName" required>
-                    
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
-                    <label for="lastName" class="col-form-label">Last Name</label>
-                </div>
-                <div class="col-md-10 col-sm-10">
-                    <input type="text" class="form-control" id="lastName" value="{{lastName}}" name="lastName" placeholder="lastName" required>
-                    
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
-                    <label for="email" class="col-form-label">Email</label>
-                </div>
-                <div class="col-md-10 col-sm-10">
-                    <input type="email" class="form-control" id="email" value="{{email}}" name="email" placeholder="email" required>
-                    
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
-                    <label for="phone" class="col-form-label">Phone</label>
-                </div>
-                <div class="col-md-10 col-sm-10">
-                    <input type="text" class="form-control" id="phone" value="{{phone}}" name="phone" placeholder="phone" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-2 col-sm-12 justify-content-end d-flex">
-                    <label for="paymentMethod" class="col-form-label">Payment Method</label>
-                </div>
-                <div class="col-md-10 col-sm-10">
-                    <input type="text" class="form-control" id="paymentMethod" value="{{paymentMethod}}" name="paymentMethod" placeholder="paymentMethod" required>
-                </div>
-            </div>
-            </div>
-        </fieldset>
-        <div class="row mb-3">
-            <div class="col">
-                <button type="submit" class="btn btn-primary mb-3">Confirm</button>
             </div>
         </div>
     </div>
-</form>
+</div>

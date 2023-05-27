@@ -1,8 +1,7 @@
-import {Reservation,Room,User,Room_Type, Review} from "./model.mjs"
+import {Reservation,Room,User,Room_Type, Review, ReservationRoom} from "./model.mjs"
 import faker from 'faker' 
 import {Op, Model, DataTypes} from 'sequelize'
 import bcrypt from "bcrypt"
-
 
 // Users
 async function generateUsers(numUsers) {
@@ -18,32 +17,17 @@ async function generateUsers(numUsers) {
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
       phone_number: faker.phone.phoneNumber(),
-      role:"admin"})
-
-    // for (let i = 0; i < numUsers; i++) {
-    //   const user = { 
-    //     username: faker.internet.userName(),
-    //     password: faker.internet.password(),
-    //     firstName: faker.name.findName(),
-    //     lastName: faker.name.lastName(),
-    //     email: faker.internet.email(),
-    //     phone_number: faker.phone.phoneNumber(),
-    //     role:"member"
-    //   }
-    //   users.push(user)
-    // }
-   
+    })
 
     for (let i = 0; i < numUsers; i++) {
-        const user = {
-          firstName: faker.name.findName(),
-          lastName: faker.name.lastName(),
-          email: faker.internet.email(),
-          phone_number: faker.phone.phoneNumber(),
-          role:"member"
-        }
-        users.push(user)
+      const user = {
+        firstName: faker.name.findName(),
+        lastName: faker.name.lastName(),
+        email: faker.internet.email(),
+        phone_number: faker.phone.phoneNumber()
       }
+      users.push(user)
+    }
     return users
   }
 
@@ -65,13 +49,12 @@ function generateBookingDate(checkInDate,Pmathod,userID) {
   
   return booking
 }
-  
 
 function generateBookings(numBookings, users) {
 const bookings = []
-const userID = [users[1].dataValues.userID,users[1].dataValues.userID,users[2].dataValues.userID,users[2].dataValues.userID,users[3].dataValues.userID,users[3].dataValues.userID,users[4].dataValues.userID,users[4].dataValues.userID]
+const userID = [users[0].dataValues.userID,users[0].dataValues.userID,users[1].dataValues.userID,users[1].dataValues.userID,users[2].dataValues.userID,users[2].dataValues.userID,users[3].dataValues.userID,users[4].dataValues.userID]
 
-for (let i = 1; i < numBookings-2; i++) {
+for (let i = 0; i < numBookings-2; i++) {
     const checkInDate = faker.date.future()
     const booking = generateBookingDate(checkInDate,"card",userID[i])
     bookings.push(booking)
@@ -108,30 +91,25 @@ function generateRoomTypes() {
     }
 
 // Rooms
-const unavRooms=[]
-function generateRooms(numRooms,types,bookings) {
+function generateRooms(types) {
 const rooms = [];
 
 for (let i = 0; i < 2; i++) {
     const room = {
     number: 10+i,
-    status:"unavailable",
     breakfast: true,
     view: true,
     smoking: false,
     freeCancelation: true,
-    RoomTypeRoomTypeID: types[0].dataValues.roomTypeID,
-    ReservationReservationID: faker.random.arrayElement(bookings).dataValues.reservationID
+    RoomTypeRoomTypeID: types[0].dataValues.roomTypeID
     }
     
     rooms.push(room)
-    unavRooms.push(room)
  }
 
 for (let i = 0; i < 2; i++) {
     const room = {
     number: 12+i,
-    status:"available",
     breakfast: true,
     view: true,
     smoking: false,
@@ -143,21 +121,17 @@ for (let i = 0; i < 2; i++) {
 for (let i = 0; i < 2; i++) {
     const room = {
     number: 20+i,
-    status:"unavailable",
     breakfast: true,
     view: true,
     smoking: false,
     freeCancelation: true,
-    RoomTypeRoomTypeID: types[1].dataValues.roomTypeID,
-    ReservationReservationID: faker.random.arrayElement(bookings).dataValues.reservationID
+    RoomTypeRoomTypeID: types[1].dataValues.roomTypeID
     }
     rooms.push(room)
-    unavRooms.push(room)
 }
 for (let i = 0; i < 2; i++) {
     const room = {
     number: 22+i,
-    status:"available",
     breakfast: true,
     view: true,
     smoking: false,
@@ -169,21 +143,17 @@ for (let i = 0; i < 2; i++) {
 for (let i = 0; i < 2; i++) {
     const room = {
     number: 30+i,
-    status:"unavailable",
     breakfast: true,
     view: true,
     smoking: false,
     freeCancelation: true,
-    RoomTypeRoomTypeID: types[2].dataValues.roomTypeID,
-    ReservationReservationID: faker.random.arrayElement(bookings).dataValues.reservationID
+    RoomTypeRoomTypeID: types[2].dataValues.roomTypeID
     }
     rooms.push(room)
-    unavRooms.push(room)
 }
 for (let i = 0; i < 2; i++) {
     const room = {
     number: 32+i,
-    status:"available",
     breakfast: true,
     view: true,
     smoking: false,
@@ -195,21 +165,17 @@ for (let i = 0; i < 2; i++) {
 for (let i = 0; i < 2; i++) {
     const room = {
     number: 40+i,
-    status:"unavailable",
     breakfast: true,
     view: true,
     smoking: false,
     freeCancelation: true,
-    RoomTypeRoomTypeID: types[3].dataValues.roomTypeID,
-    ReservationReservationID: faker.random.arrayElement(bookings).dataValues.reservationID
+    RoomTypeRoomTypeID: types[3].dataValues.roomTypeID
     }
     rooms.push(room)
-    unavRooms.push(room)
 }
 for (let i = 0; i < 2; i++) {
     const room = {
     number: 42+i,
-    status:"available",
     breakfast: true,
     view: true,
     smoking: false,
@@ -223,16 +189,32 @@ for (let i = 0; i < 2; i++) {
 return rooms
 }
 
+//Booked Rooms
+function generateReservationRooms(numRooms,rooms,bookings){
+  const bookedRooms=[]
+  for(let i=0;i<numRooms;i++){
+    if(i%2===0){ 
+      const bookedRoom = {
+        ReservationReservationID: faker.random.arrayElement(bookings).dataValues.reservationID,
+        RoomRoomID: rooms[i].roomID
+        
+        }
+        bookedRooms.push(bookedRoom)
+    }
+  }
+  return bookedRooms
+  
+}
 
 //Create initial DB data
 async function createdata(){   
-
   
   const userData = await User.count()
   const roomTypeData = await Room_Type.count()
   const bookingData = await Reservation.count()
   const roomData = await Room.count()
   const reviewData = await Review.count()
+  const bookedRoomData = await ReservationRoom.count()
 
   try {
   // Generate users
@@ -257,14 +239,21 @@ async function createdata(){
 
   // Generate rooms
   if(roomData===0)
-  {const numRooms = 16 
-  const bookingsArray = await Reservation.findAll()
-  const roomTypesArray = await Room_Type.findAll()
-  const rooms = generateRooms(numRooms,roomTypesArray,bookingsArray)
+  {const roomTypesArray = await Room_Type.findAll()
+  const rooms = generateRooms(roomTypesArray)
   await Room.bulkCreate(rooms)   } 
   
+  //Generate booked rooms
+  if(bookedRoomData===0)
+  {const numRooms = 16 
+  const rooms = await Room.findAll({raw:true})
+  const bookings = await Reservation.findAll()
+  const reservationRooms = generateReservationRooms(numRooms,rooms,bookings)
+  await ReservationRoom.bulkCreate(reservationRooms)
 
-  console.log('Dummy data generated successfully!')
+}
+
+  console.log('Ramdom data generated successfully!')
 } catch (error) {
   console.error('Error generating dummy data:', error);
   } 
@@ -272,4 +261,4 @@ async function createdata(){
 }
 
 
-export { createdata }
+export{createdata}

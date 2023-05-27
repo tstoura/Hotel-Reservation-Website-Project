@@ -1,4 +1,4 @@
-import { Review, Reservation, Room, Room_Type, User } from "./models/model.mjs";
+import { Review, Reservation, Room, Room_Type, User, ReservationRoom} from "./models/model.mjs";
 import { sequelize, connectDB } from "./models/db-config.mjs";
 
 connectDB(sequelize)
@@ -7,6 +7,9 @@ connectDB(sequelize)
 
 await Review.drop();
 console.log("Review table dropped!")
+
+await ReservationRoom.drop();
+console.log("Reservation table dropped!")
 
 await Reservation.drop();
 console.log("Reservation table dropped!")

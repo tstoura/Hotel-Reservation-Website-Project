@@ -54,6 +54,9 @@ const adminDeleteUser = async(req, res, next) => {
 const findAllBookings = async (req, res, next) => {
     const bookings = await seqObj.Reservation.findAll()
     const sanitized_bookings = bookings.map( entry => entry.dataValues)
+    // const roomID = await seqObj.ReservationRoom.findOne({where: { ReservationReservationID: bookings.reservationID } })
+    // sanitized_bookings.push(roomID)
+    // console.log(sanitized_bookings)
     req.bookings = sanitized_bookings
     next()
 }

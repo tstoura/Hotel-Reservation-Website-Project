@@ -24,7 +24,7 @@ async function addUser(newUser){
         throw new Error("The user already exists")
     const hash = await bcrypt.hash(newUser.password, 10)
     newUser.password = hash
-    console.log(newUser)
+    // console.log(newUser)
     await User.create(newUser)
     return true
     } catch(error){

@@ -43,12 +43,7 @@ const User = sequelize.define('User',{
     phone_number:{
         type: DataTypes.TEXT,
         allowNull: false
-    },
-    role:{
-        type: DataTypes.TEXT,
-        allowNull: false
     }
-    
 })
 
 
@@ -56,7 +51,7 @@ const Reservation = sequelize.define('Reservation',{
     reservationID:{
         type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true,
+        autoIncrement:true,
         primaryKey: true,
     },
     check_in_date:{
@@ -107,6 +102,7 @@ const Review = sequelize.define('Review',{
         type: DataTypes.DATEONLY,
         allowNull: false
     }
+    
 })
 
 const Room = sequelize.define('Room',{
@@ -118,10 +114,6 @@ const Room = sequelize.define('Room',{
     },
     number:{
         type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    status:{
-        type: DataTypes.TEXT,
         allowNull: false
     },
     breakfast:{
@@ -163,6 +155,24 @@ const Room_Type = sequelize.define('Room_Type',{
     }
 })
 
+const ReservationRoom = sequelize.define('ReservationRoom', {
+    ReservationReservationID: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      references: {
+        model: Reservation,
+        key: 'reservationID',
+      },
+    },
+    RoomRoomID: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      references: {
+        model: Room,
+        key: 'roomID',
+      },
+    },
+  })
 
 User.hasMany(Reservation)
 Reservation.belongsTo(User)
@@ -173,9 +183,15 @@ Review.belongsTo(Reservation)
 Room_Type.hasMany(Room)
 Room.belongsTo(Room_Type)
 
-Room.hasMany(Reservation)
-Reservation.belongsTo(Room)
+// Reservation.hasMany(Room)
+// Room.belongsTo(Reservation)
+
+Reservation.belongsToMany(Room, { through: ReservationRoom })
+Room.belongsToMany(Reservation, { through: ReservationRoom })
+// ReservationRoom.belongsTo(Room, { foreignKey: 'RoomRoomID', targetKey: 'roomID' });
+// Room.hasMany(ReservationRoom, { foreignKey: 'RoomRoomID', sourceKey: 'roomID' });
 
 await sequelize.sync({alter:true})
 
-export {User, Room, Room_Type, Review, Reservation}
+
+export {User, Room, Room_Type, Review, Reservation,ReservationRoom}
