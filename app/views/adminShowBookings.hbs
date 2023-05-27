@@ -20,11 +20,13 @@
                     </div>
                 </div>
             {{/if}}
-            <h3>Bookings: {{bookings.length}}</h3>
+           
         </div>  
     </div>
-
+    <div> <h3>Bookings: {{bookings.length}}</h3></div>
+    
     {{#if bookings}}
+        
         <div class="table-responsive-sm">
             <table class="table table-hover">
                 <thead>
@@ -44,7 +46,7 @@
                             <td>{{this.reservationID}}</td>
                             <td>{{this.status}}</td>
                             <td>{{this.UserUserID}}</td>
-                            <td>{{this.Rooms.number}}</td>
+                            <td>{{this.Rooms_number}}</td>
                             <td>{{this.check_in_date}}</td>
                             <td>{{this.check_out_date}}</td>
                             <td>
@@ -56,12 +58,17 @@
                         </tr>
                     {{/each}}
                 </tbody>
+                {{!-- <div class="row mt-2">
+                    <div class="col">
+                        <a class="btn btn-sm btn-secondary" href="/adminAddBooking">Add Booking</a>
+                    </div>
+                </div> --}}
+            </table>
                 <div class="row mt-2">
                     <div class="col">
                         <a class="btn btn-sm btn-secondary" href="/adminAddBooking">Add Booking</a>
                     </div>
                 </div>
-            </table>
         {{!-- <h3> {{users}}</h3> --}}
         </div>
     {{/if}}

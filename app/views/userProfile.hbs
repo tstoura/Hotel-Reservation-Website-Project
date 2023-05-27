@@ -3,6 +3,8 @@
         <div class="col-md-8">
         <h2>My Reservations</h2>
         <table class="table table-striped">
+        
+        
             <thead>
             <tr>
                 <th>Reservation ID</th>
@@ -11,16 +13,14 @@
             </tr>
             </thead>
             <tbody>
+
+            {{#each bookings}}
             <tr>
-                <td>1</td>
-                <td>2023-06-01</td>
-                <td>2023-06-05</td>
+                <td>{{this.reservationID}}</td>
+                <td>{{this.check_in_date}}</td>
+                <td>{{this.check_out_date}}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>2023-07-10</td>
-                <td>2023-07-15</td>
-            </tr>
+        {{/each}}
             <!-- Add more reservation rows here -->
             </tbody>
         </table>
@@ -31,8 +31,8 @@
         <div class="card">
             <div class="card-body">
             <h5 class="card-title">{{username}}</h5>
-            <p class="card-text">Email:{{email}}</p>
-            <p class="card-text">Phone: {{phone}}</p>
+            <p class="card-text">Email: {{email}}</p>
+            <p class="card-text">Phone: {{phone_number}}</p>
             </div>
         </div>
         </div>

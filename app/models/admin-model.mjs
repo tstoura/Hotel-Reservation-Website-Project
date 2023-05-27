@@ -14,8 +14,13 @@ async function showReservations(){
               raw: true
             })
         
-        console.log("Booking: ",bookings[0])
-        // console.log("Room Number:", bookings.Rooms.number[0])
+        // console.log("Booking: ",bookings)
+
+        for(let i = 0; i<bookings.length; i++){
+            bookings[i].Rooms_number = bookings[i]['Rooms.number']
+        }
+        // console.log("Bookings after map:", bookings)
+
         return bookings
     }catch(error){
         throw error
@@ -34,13 +39,15 @@ async function addReservation(newReservation) {
     try {
       const reservation = await Reservation.create(newReservation);
   
-      // Associate the reservation with the room
+    //   Associate the reservation with the room
       await ReservationRoom.create({
-        ReservationReservationID: reservation.reservationID,
+        ReservationReservationID: reservation.dataValues.reservationID,
         RoomRoomID: newReservation.RoomRoomID,
       });
-  
+      console.log(newReservation)
+      console.log(reservation)
       return reservation;
+   
     } catch (error) {
       throw error;
     }

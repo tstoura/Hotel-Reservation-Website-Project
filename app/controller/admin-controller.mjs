@@ -48,9 +48,8 @@ const adminDeleteUser = async(req, res, next) => {
 
 const findAllBookings = async (req, res, next) => {
     const bookings = await Admin.showReservations()
+    // console.log("2",bookings)
     req.bookings = bookings
-    console.log(req.bookings)
-    
     next()
 }
 
@@ -63,7 +62,7 @@ const adminDoAddBooking = async (req, res, next) => {
             "guests_count": req.body["guests_count"],
             "paymentMethod": req.body["paymentMethod"],
             "UserUserID": req.body["userID"],
-            "RoomRoomID": req.body["roomID"]
+            "RoomRoomID": req.body["RoomRoomID"]
         })
         req.message = 'Booking Added!'
         next()
@@ -73,16 +72,6 @@ const adminDoAddBooking = async (req, res, next) => {
     }
 }
 
-// const adminDeleteBooking = async(req, res, next) => {
-//     try{
-//         await Admin.deleteReservation(req.query["reservationID"])
-//         req.message = 'Booking successfully deleted!'
-//         next()
-//     } catch(error){
-//         req.message = 'Failed to delete booking!'
-
-//     }
-// }
 
 const adminDeleteBooking = async (req, res, next) => {
     try {

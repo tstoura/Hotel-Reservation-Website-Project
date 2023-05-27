@@ -61,7 +61,7 @@ router.post("/dologin",
         req.session.username = req.body.username
         res.locals.username = req.session.username
         if(req.session.username === 'admin'){
-            res.render("admin")
+            res.redirect("/admin")
         }
         res.render("home")
     }
@@ -141,6 +141,13 @@ router.post("/doCompleteBooking",
 
 //----------Admin----------//
 //show, add & delete users (add not completed)
+
+router.get("/admin", 
+    UserController.checkIfAuthenticated,
+    (req, res) => {
+    res.render("admin")
+})
+
 router.get("/adminShowUsers", 
     UserController.checkIfAuthenticated,
     AdminController.checkIfAuthenticatedAdmin,  
@@ -206,19 +213,23 @@ router.get("/adminDeleteBooking",
     AdminController.adminDeleteBooking,
     AdminController.findAllBookings, 
     (req,res) => {
-    res.render("adminShowBookings", {bookings: req.bookings})
+    res.render("adminShowBookings", { bookings: req.bookings })
 })
 
 router.get("/profile",
     UserController.checkIfAuthenticated,
-    (req,res) => {
+    (req,res, next) => {
         if(req.session.username === "admin"){
             res.render("admin")
         }
-        else{
-            res.render("userProfile")
-        }
-    
-})
+    next()},
+   
+    UserController.userGetInfo,
+    UserController.userShowBookings,
+    (req, res) => {
+        res.render("userProfile")
+    }
+
+)
 
 export {router}

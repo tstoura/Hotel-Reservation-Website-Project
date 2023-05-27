@@ -61,14 +61,19 @@ async function login(username,password){
 async function userBookings(userID){
 
     const bookings = await Reservation.findAll({
-        include:[
-            {model:User,
-            where:{UserUserID:userID}}
-        ],
-        raw:true
+        where: {UserUserID: userID}
     })
     console.log(bookings)
     return bookings
 }
 
-export {addUser,login, userBookings}
+async function getUserInfo(username){
+    const user = await User.findAll({
+        where: { username: username },
+        raw: true
+    })
+    console.log(user)
+    return user
+}
+
+export {addUser,login, userBookings, getUserInfo}

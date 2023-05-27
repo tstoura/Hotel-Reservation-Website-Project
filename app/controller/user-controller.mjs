@@ -47,9 +47,24 @@ function checkIfAuthenticated(req, res, next) {
     next() //επόμενο middleware
 }
 
-async function userShowBookings(req,res,next){
-    
-    const bookings = await User.userBookings()
+
+async function userGetInfo(req, res, next){
+
+    const info = await User.getUserInfo(req.session.username)
+    console.log("Info:",info)
+    res.locals.email = info[0].email
+    res.locals.phone_number = info[0].phone_number
+    req.session.userID = info[0].userID
+    next()
+
 }
 
-export { doRegister, doLogin, checkIfAuthenticated, doLogout, userShowBookings}
+async function userShowBookings(req,res,next){
+    
+    const bookings = await User.userBookings(req.session.userID)
+    console.log("bookings:",bookings)
+    res.locals.bookings = bookings
+    next()
+}
+
+export { doRegister, doLogin, checkIfAuthenticated, doLogout, userShowBookings, userGetInfo}
