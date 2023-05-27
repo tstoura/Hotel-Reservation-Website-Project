@@ -10,7 +10,7 @@ async function generateUsers(numUsers) {
     const hash = await bcrypt.hash('admin', 10)
     const pass = hash
 
-    users.push({userID: -1,
+    users.push({userID: 0,
       username: 'admin',
       password: pass,
       firstName: faker.name.findName(),
@@ -19,7 +19,7 @@ async function generateUsers(numUsers) {
       phone_number: faker.phone.phoneNumber(),
     })
 
-    for (let i = 0; i < numUsers; i++) {
+    for (let i = 1; i < numUsers; i++) {
       const user = {
         firstName: faker.name.findName(),
         lastName: faker.name.lastName(),

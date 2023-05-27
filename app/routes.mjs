@@ -63,7 +63,6 @@ router.post("/dologin",
         if(req.session.username === 'admin'){
             res.render("admin")
         }
-        // res.render("home",{username = req.session.username})
         res.render("home")
     }
 )
@@ -212,9 +211,14 @@ router.get("/adminDeleteBooking",
 
 router.get("/profile",
     UserController.checkIfAuthenticated,
-    AdminController.checkIfAuthenticatedAdmin, 
     (req,res) => {
-    res.render("admin")
+        if(req.session.username === "admin"){
+            res.render("admin")
+        }
+        else{
+            res.render("userProfile")
+        }
+    
 })
 
 export {router}

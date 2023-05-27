@@ -1,5 +1,26 @@
-import {User, Reservation} from "./model.mjs"
+import {User, Reservation,Room, ReservationRoom} from "./model.mjs"
 
+async function showReservations(){
+    try{
+        const bookings = await Reservation.findAll( {
+            include:[
+                {model:Room,
+                attributes:['roomID','number'],
+                through:{
+                    model:ReservationRoom,
+                }}
+            ],
+            
+              raw: true
+            })
+        
+        console.log("Booking: ",bookings[0])
+        // console.log("Room Number:", bookings.Rooms.number[0])
+        return bookings
+    }catch(error){
+        throw error
+    }
+}
 async function addReservation(newReservation){
     try{
         // console.log(newReservation)
@@ -37,4 +58,4 @@ async function deleteUser(userID){
     }
 }
 
-export {addReservation, deleteReservation, addUser, deleteUser}
+export {showReservations,addReservation, deleteReservation, addUser, deleteUser}

@@ -81,9 +81,6 @@ const availableRooms = async (req,res,next)=>{
             addCountSingle.roomsCount=0
         }
         
-
-        //roomTypes and their info
-        // console.log("CONTROLLER: ", roomTypes)
         if(req.session.username){ //an o xristis exei logariasmo kai einai sindedemenos
         //pername sto selectRoom kai ta stoixeia tou xrhsth pou xreiazetai h forma, wste na einai automata
         //simplirwmena

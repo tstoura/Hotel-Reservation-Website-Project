@@ -36,10 +36,7 @@ const adminDoAddUser = async (req, res, next) => {
 
 const adminDeleteUser = async(req, res, next) => {
     try{
-        // await Admin.deleteReservation({
-        //     "reservationID": req.body["reservationID"]
-        // })
-        // console.log(req.body["reservationID"])
+
         await Admin.deleteUser(req.query["userID"])
         req.message = 'User successfully deleted!'
         next()
@@ -50,12 +47,10 @@ const adminDeleteUser = async(req, res, next) => {
 }
 
 const findAllBookings = async (req, res, next) => {
-    const bookings = await seqObj.Reservation.findAll()
-    const sanitized_bookings = bookings.map( entry => entry.dataValues)
-    // const roomID = await seqObj.ReservationRoom.findOne({where: { ReservationReservationID: bookings.reservationID } })
-    // sanitized_bookings.push(roomID)
-    // console.log(sanitized_bookings)
-    req.bookings = sanitized_bookings
+    const bookings = await Admin.showReservations()
+    req.bookings = bookings
+    console.log(req.bookings)
+    
     next()
 }
 
@@ -80,10 +75,6 @@ const adminDoAddBooking = async (req, res, next) => {
 
 const adminDeleteBooking = async(req, res, next) => {
     try{
-        // await Admin.deleteReservation({
-        //     "reservationID": req.body["reservationID"]
-        // })
-        // console.log(req.body["reservationID"])
         await Admin.deleteReservation(req.query["reservationID"])
         req.message = 'Booking successfully deleted!'
         next()
