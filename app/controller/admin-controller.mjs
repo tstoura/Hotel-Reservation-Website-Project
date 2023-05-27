@@ -73,16 +73,29 @@ const adminDoAddBooking = async (req, res, next) => {
     }
 }
 
-const adminDeleteBooking = async(req, res, next) => {
-    try{
-        await Admin.deleteReservation(req.query["reservationID"])
-        req.message = 'Booking successfully deleted!'
-        next()
-    } catch(error){
-        req.message = 'Failed to delete booking!'
+// const adminDeleteBooking = async(req, res, next) => {
+//     try{
+//         await Admin.deleteReservation(req.query["reservationID"])
+//         req.message = 'Booking successfully deleted!'
+//         next()
+//     } catch(error){
+//         req.message = 'Failed to delete booking!'
 
+//     }
+// }
+
+const adminDeleteBooking = async (req, res, next) => {
+    try {
+      const reservationID = req.query.reservationID;
+      await Admin.deleteReservation(reservationID);
+      req.message = 'Booking successfully deleted!';
+      next();
+    } catch (error) {
+      req.message = 'Failed to delete booking!';
+      next();
     }
-}
+  };
+  
 
 const checkIfAuthenticatedAdmin = async(req, res, next) => { //dinoume access ston admin gia tis selides tou
     if(req.session.username === 'admin'){
@@ -92,5 +105,9 @@ const checkIfAuthenticatedAdmin = async(req, res, next) => { //dinoume access st
         res.render("error", {message: "Wrong Credentials, access denied!"})
     }
 }
+
+// async function bookedRooms(){
+//     const bookedRooms = await Admin.getBookedRooms()
+// }
 
 export{findAllUsers, adminDoAddUser, adminDeleteUser, findAllBookings, adminDoAddBooking, adminDeleteBooking, checkIfAuthenticatedAdmin}

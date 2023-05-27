@@ -43,6 +43,7 @@ function generateBookingDate(checkInDate,Pmathod,userID) {
     check_in_date: checkInDate,
     check_out_date: checkOutDate,
     total_price: 250,
+    status: 'completed',
     paymentMethod: Pmathod,
     UserUserID: userID 
   }
@@ -52,7 +53,7 @@ function generateBookingDate(checkInDate,Pmathod,userID) {
 
 function generateBookings(numBookings, users) {
 const bookings = []
-const userID = [users[0].dataValues.userID,users[0].dataValues.userID,users[1].dataValues.userID,users[1].dataValues.userID,users[2].dataValues.userID,users[2].dataValues.userID,users[3].dataValues.userID,users[4].dataValues.userID]
+const userID = [users[1].dataValues.userID,users[1].dataValues.userID,users[2].dataValues.userID,users[2].dataValues.userID,users[3].dataValues.userID,users[3].dataValues.userID,users[4].dataValues.userID,users[4].dataValues.userID]
 
 for (let i = 0; i < numBookings-2; i++) {
     const checkInDate = faker.date.future()

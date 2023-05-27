@@ -47,4 +47,9 @@ function checkIfAuthenticated(req, res, next) {
     next() //επόμενο middleware
 }
 
-export { doRegister, doLogin, checkIfAuthenticated, doLogout }
+async function userShowBookings(req,res,next){
+    
+    const bookings = await User.userBookings()
+}
+
+export { doRegister, doLogin, checkIfAuthenticated, doLogout, userShowBookings}

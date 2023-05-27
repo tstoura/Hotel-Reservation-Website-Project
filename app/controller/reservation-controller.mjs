@@ -117,4 +117,6 @@ const availableRooms = async (req,res,next)=>{
     
 }
 
+
+
 export {doAddReservation, availableRooms}

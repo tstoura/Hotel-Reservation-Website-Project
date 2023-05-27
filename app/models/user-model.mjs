@@ -1,4 +1,4 @@
-import {User} from "./model.mjs"
+import {Reservation, User} from "./model.mjs"
 import bcrypt from "bcrypt"
 
 // async function addUser(newUser){
@@ -58,4 +58,17 @@ async function login(username,password){
     }
 }
 
-export {addUser,login}
+async function userBookings(userID){
+
+    const bookings = await Reservation.findAll({
+        include:[
+            {model:User,
+            where:{UserUserID:userID}}
+        ],
+        raw:true
+    })
+    console.log(bookings)
+    return bookings
+}
+
+export {addUser,login, userBookings}
