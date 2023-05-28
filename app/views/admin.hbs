@@ -1,0 +1,34 @@
+<script> 
+    const roomsData = {{rooms}}
+</script>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 sidebar">
+      <h3>Admin Dashboard</h3>
+      <ul>
+        <li><a href="/adminShowUsers">Users</a></li>
+        <li><a href="/adminShowBookings">Bookings</a></li>
+        <li><a href="/adminshowRooms">Rooms</a></li>
+      </ul>
+    </div>
+    <div class="col-md-9">
+      
+      <main role="main" class="col-lg-10 ml-sm-auto px-4">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                Hotel Occupancy
+              </div>
+              <div class="card-body">
+                <input type="hidden" id="roomsData" value="{{rooms}}">
+                <canvas id="myChart"></canvas>                
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

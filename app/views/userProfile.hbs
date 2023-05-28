@@ -1,0 +1,49 @@
+<div class="container mt-5">
+    <div class="row">
+        {{#if bookings}}
+        <div class="col-md-8">
+        <h2>My Reservations</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>Price</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each bookings}}
+            
+            <tr class="booking {{this.status}}" id="tr">
+                <td>{{this.check_in_date}}</td>
+                <td>{{this.check_out_date}}</td>
+                <td>{{this.total_price}}</td>
+                <td>{{this.status}}</td>
+                <td>
+                    <a href="/cancel?bookingID={{this.reservationID}}" id="cancelBtn" value="{{this.reservationID}}">
+                        <button type="button">Cancel</button>
+                    </a>
+                </td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        </div>
+        {{/if}}
+        <div class="col-md-4">
+        <h2 >User Information</h2>
+        <div class="card sideInfo">
+            <div class="card-body">
+            <h5 class="card-title">{{username}}</h5>
+            <p class="card-text">Email: {{email}}</p>
+            <p class="card-text">Phone: {{phone_number}}</p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</div>
+
+  
+  

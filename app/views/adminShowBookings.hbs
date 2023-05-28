@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-lg-2 sidebar">
+      <ul>
+        <li><a href="/adminShowUsers">Users</a></li>
+        <li><a href="/adminShowBookings">Bookings</a></li>
+        <li><a href="/adminShowRooms">Rooms</a></li>
+      </ul>
+    </div>
+
+    <div class="col-md-9 col-lg-10">
+      {{#if message}}
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="alert alert-primary" role="alert">
+            {{message}}
+          </div>
+        </div>
+      </div>
+      {{/if}}
+      <div>
+        <h3>Bookings: {{bookings.length}}</h3>
+      </div>
+
+      {{#if bookings}}
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Reservation ID</th>
+              <th>Reservation's Status</th>
+              <th>User ID</th>
+              <th>Room Number</th>
+              <th>Check-In Date</th>
+              <th>Check-Out Date</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each bookings}}
+            {{!-- mono gia ta available rooms!! --}}
+            <tr>
+              <td>{{this.reservationID}}</td>
+              <td>{{this.status}}</td>
+              <td>{{this.UserUserID}}</td>
+              <td>{{this.Rooms_number}}</td>
+              <td>{{this.check_in_date}}</td>
+              <td>{{this.check_out_date}}</td>
+              <td>
+                <a class="btn btn-sm btn-secondary" href="/adminEditBooking?reservationID={{this.reservationID}}">Edit Booking</a>
+              </td>
+              <td>
+                <a class="btn btn-sm btn-secondary" href="/adminDeleteBooking?reservationID={{this.reservationID}}">Delete Booking</a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <div class="row mt-2">
+          <div class="col">
+            <a class="btn btn-sm btn-secondary" href="/adminAddBooking">Add Booking</a>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+
+      {{#unless bookings}}
+      <div class="row mt-5">
+        <div class="col">No Bookings Found!</div>
+      </div>
+      {{/unless}}
+    </div>
+  </div>
+</div>

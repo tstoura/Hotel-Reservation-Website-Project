@@ -1,0 +1,74 @@
+<div class="container mt-5 selectRoomsBack">
+  <div class="row availability-box">
+    <div class="col-md-10 offset-md-1">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Availability</h4>
+          <form class="form-inline justify-content-center" action="/doCheckAvailability" method="get">
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+              <div class="form-group">
+                <label for="check_in_date">Check-in Date</label>
+                <input type="date" class="form-control ml-2" id="check_in_date" name="check_in_date" value="{{check_in_date}}" required>
+              </div>
+              <div class="form-group">
+                <label for="check_out_date">Check-out Date</label>
+                <input type="date" class="form-control ml-2" id="check_out_date" name="check_out_date" value="{{check_out_date}}" required>
+              </div>
+              <div class="form-group">
+                <label for="guests">Guests</label>
+                <input type="number" class="form-control ml-2" id="guests" name="guests" value="{{guests}}" min="1" style="width: 60px;" required>
+              </div>
+              <div class="form-group">
+                <label for="rooms">Rooms</label>
+                <input type="number" class="form-control ml-2" id="rooms" value="{{rooms}}" min="1" style="width: 60px;" required>
+              </div>
+              <button type="submit" class="btn btn-secondary ml-2">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{#if Avrooms}}
+  <div class="row mt-5">
+    <div class="col-md-10 offset-md-1">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Room Type</th>
+            <th>Information</th>
+            <th>Number of Rooms</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each roomTypes}}
+          {{#if this.roomsCount}}
+          <tr class="room">
+            <td class="typeName" id="{{this.roomTypeID}}" value="">{{this.typeName}}<img src="../imgs/{{this.typeName}}.jpg" alt="Room"></td>
+            <td class="info">
+              <hr>
+              {{!-- <div>Bla bla</div> --}}
+              <div id="priceXdays" value="{{this.pricePerNight}}"></div>
+              <div id="totalPrice" name="totalPrice"></div>
+            </td>
+            <td>
+              <input type="number" class="form-control" id="roomsCount" value="" min="0" max="{{this.roomsCount}}" placeholder="0" style="width: 60px;">
+            </td>
+            <td>
+              <button type="button" class="btn btn-secondary ml-2" id="addBtn" value="{{this.roomTypeID}}">Add to Booking</button> 
+            </td>
+          </tr>
+          {{/if}}
+          {{/each}}
+          <tr>
+              <td colspan="4" class="text-center">
+                <a class="btn btn-sm btn-secondary" id="bookAll" href="/doBookRoom?check_in_date={{check_in_date}}&check_out_date={{check_out_date}}&guests={{guests}} {{#if username}}&firstName={{firstName}}&lastName={{lastName}}&phone_number={{phone_number}}&email={{email}}{{/if}}">Book</a>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {{/if}}
+</div>

@@ -1,0 +1,98 @@
+<form action="/doregister" method="post">
+    {{#if message}}
+        <div class="row mt-5">
+            <div class="col-6 offset-3">
+                <div class="alert alert-primary" role="alert">
+                    {{message}}
+                </div>
+            </div>
+        </div>
+    {{/if}}
+    <div class="row mt-5">
+        <div class="col-8 offset-2">
+            <h2 class="text-center">Create Account</h2>
+        </div>
+    </div><div class="row mt-1">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                <label class="form-label" for="firstName">First Name</label>
+                <input type="text" class="form-control "
+                    value="{{firstName}}" name="firstName" id="firstName" placeholder="First Name"
+                    required="required" autofocus>                
+            </div>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                <label class="form-label" for="lastName">Last Name</label>
+                <input type="text" class="form-control "
+                    value="{{lastName}}" name="lastName" id="lastName" placeholder="Last Name"
+                    required="required" autofocus>                
+            </div>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+
+                <label class="form-label" for="username">Username</label>
+                <input type="text" class="form-control "
+                    value="{{username}}" name="username" id="username" placeholder="Username"
+                    required="required" autofocus>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" class="form-control " value=""
+                    name="password" id="password" placeholder="Password" required="required">                
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                <label class="form-label" for="password-confirm">Confirm Password</label>
+                <input type="password" class="form-control " value=""
+                    name="password-confirm" id="password-confirm" placeholder="Confirm Password"
+                    required="required">                
+            </div>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" class="form-control "
+                    value="{{email}}" name="email" id="email" placeholder="Email"
+                    required="required" autofocus>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                <label class="form-label" for="phone">Phone Number</label>
+                <input type="text" class="form-control "
+                    value="{{phone}}" name="phone" id="phone" placeholder="Phone Number"
+                    required="required" autofocus>
+
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-6 offset-3">
+            <button type="submit" class="btn btn-secondary login-btn btn-block w-100">Register</button>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-6 offset-3 text-center">
+            Already a member? 
+            <a href="/login">Login to your account</a>
+        </div>
+    </div>
+
+</form>
