@@ -1,7 +1,6 @@
-
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3 sidebar">
+    <div class="col-md-3 col-sm-12 sidebar">
       <ul>
         <li><a href="/adminShowUsers">Users</a></li>
         <li><a href="/adminShowBookings">Bookings</a></li>
@@ -9,72 +8,50 @@
       </ul>
     </div>
 
-    <div> <h3>Rooms: {{rooms.length}}</h3></div>
-    
-    {{#if rooms}}
-        
-        <div class="table-responsive-sm">
-            
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Room ID</th>
-                        <th>Room's Number</th>
-                        <th>Capacity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each rooms}} 
-                    {{!-- mono gia ta available rooms!! --}}
-                        <tr>
-                            <td>{{this.roomID}}</td>
-                            <td>{{this.number}}</td>
-                            <td>{{this.RoomTypeRoomTypeID}}</td>
-{{!--                             
-                            
-                            <td>
-                                <a class="btn btn-sm btn-secondary" href="/adminEditBooking?reservationID={{this.reservationID}}">Edit Booking</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-sm btn-secondary" href="/adminDeleteBooking?reservationID={{this.reservationID}}">Delete Booking</a>
-                            </td> --}}
+    <div class="col-md-9 col-sm-12">
+      {{#if message}}
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="alert alert-primary" role="alert">
+            {{message}}
+          </div>
+        </div>
+      </div>
+      {{/if}}
+      <div>
+        <h3>Rooms: {{rooms.length}}</h3>
+      </div>
 
-                        </tr>
-                    {{/each}}
-                </tbody>
+      {{#if rooms}}
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Room ID</th>
+              <th>Room's Number</th>
+              <th>Capacity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each rooms}}
+            {{!-- mono gia ta available rooms!! --}}
+            <tr>
+              <td>{{this.roomID}}</td>
+              <td>{{this.number}}</td>
+              <td>{{this.RoomTypeRoomTypeID}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+      {{/if}}
 
-            </table>
-                <div class="row mt-5">
-                    <div class="col-12">
-                        {{#if message}}
-                            <div class="row mt-5">
-                                <div class="col-6 offset-3">
-                                    <div class="alert alert-primary" role="alert">
-                                        {{message}}
-                                    </div>
-                                </div>
-                            </div>
-                        {{/if}}
-           
-                    </div>  
-                </div>
-        </div>
-    {{/if}}
-    {{#unless rooms}}
-        <div class="row mt-5">
-            <div class="col">No Rooms Found!</div>
-        </div>
-    
-    {{/unless}}
-    {{!-- {{#if error}} 
-        <div class="row mt-5">
-            <div class="col-6 offset-3">
-                <div class="alert alert-primary" role="alert">
-                    {{error}}
-                </div>
-            </div>
-        </div>
-    {{/if}} --}}
+      {{#unless rooms}}
+      <div class="row mt-5">
+        <div class="col">No Rooms Found!</div>
+      </div>
+      {{/unless}}
+
+    </div>
   </div>
 </div>
-

@@ -44,7 +44,6 @@ router.get("/register", (req, res) => {
 })
 
 router.post("/doregister",
-    // Validator.validateNewUser,
     UserController.doRegister,
     (req, res) => {
         req.session.username = req.body.username
@@ -57,7 +56,6 @@ router.get("/login", (req, res) => {
 })
 
 router.post("/dologin",
-    // Validator.validateLogin,
     UserController.doLogin,
     (req, res) => {
         req.session.username = req.body.username
@@ -76,11 +74,6 @@ router.get("/logout", UserController.doLogout,
 
 
 //------------------------------------------//
-
-// router.get("/logout", (req, res) => {
-//     UserController.checkIfAuthenticated,
-//     res.render("home")
-// })
 
 
 //------------doReservation------------//
@@ -104,7 +97,6 @@ router.get("/doBookRoom",
     const priceForOneArray = req.query.price
     
 
-    // let totalPrice = calculateTotalPrice()
     let roomsCount = 0
     let totalPrice = 0
     if( roomsCountArray.length > 1 ){
@@ -270,8 +262,6 @@ router.get("/adminShowRooms",
         res.render("adminShowRooms", { rooms: req.rooms })
     }
 )
-
-
 
 
 export {router}

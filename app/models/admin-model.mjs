@@ -39,8 +39,6 @@ async function addReservation(newReservation) {
         ReservationReservationID: reservation.dataValues.reservationID,
         RoomRoomID: newReservation.RoomRoomID,
       });
-      console.log(newReservation)
-      console.log(reservation)
       return reservation;
    
     } catch (error) {
@@ -52,9 +50,6 @@ async function findReservation(reservationID){
   try{
     const resInfo = await Reservation.findByPk(reservationID);
     const roomID = await ReservationRoom.findByPk(reservationID);
-    console.log("roomID:",roomID.dataValues)
-    console.log("roomID.dataValues.RoomRoomID:", roomID.dataValues.RoomRoomID)
-    console.log("resInfo", resInfo.dataValues)
     return {resInfo: resInfo.dataValues, roomID:roomID.dataValues.RoomRoomID}
   }catch(error){
     throw error
