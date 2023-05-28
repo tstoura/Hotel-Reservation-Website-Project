@@ -1,4 +1,15 @@
 <form action="/dologin" method="post">
+
+    {{#if message}}
+    <div class="row mt-5">
+        <div class="col-6 offset-3">
+            <div class="alert alert-primary" role="alert">
+                {{message}}
+            </div>
+        </div>
+    </div>
+    {{/if}}
+    
     <div class="row mt-5">
         <div class="col-8 offset-2">
             <h2 class="text-center">Enter your username and password</h2>
@@ -36,13 +47,5 @@
             <a href="/register">Create  an account!</a>
         </div>
     </div>
-    {{#if message}}
-    <div class="row mt-5">
-        <div class="col-6 offset-3">
-            <div class="alert alert-primary" role="alert">
-                {{message}}
-            </div>
-        </div>
-    </div>
-    {{/if}}
+
 </form>
