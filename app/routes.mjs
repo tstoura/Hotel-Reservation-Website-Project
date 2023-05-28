@@ -1,5 +1,5 @@
 import express from 'express'
-// import {BookList} from './booklist.mjs'
+// import * as Validator from '../validator/validation.mjs'
 import * as ResController from './controller/reservation-controller.mjs'
 import * as UserController from './controller/user-controller.mjs'
 import * as AdminController from './controller/admin-controller.mjs'
@@ -44,6 +44,7 @@ router.get("/register", (req, res) => {
 })
 
 router.post("/doregister",
+    // Validator.validateNewUser,
     UserController.doRegister,
     (req, res) => {
         req.session.username = req.body.username
@@ -56,6 +57,7 @@ router.get("/login", (req, res) => {
 })
 
 router.post("/dologin",
+    // Validator.validateLogin,
     UserController.doLogin,
     (req, res) => {
         req.session.username = req.body.username
@@ -203,7 +205,7 @@ router.post("/adminDoAddBooking",
     AdminController.adminDoAddBooking,
     AdminController.findAllBookings,
     (req, res) => {
-        res.render("adminShowBookings",{ message:req.message, bookings:req.bookings })
+        res.render("adminShowBookings",{ message:req.message, bookings: req.bookings })
     }
 )
 
@@ -223,13 +225,11 @@ router.get("/profile",
             res.render("admin")
         }
     next()},
-   
     UserController.userGetInfo,
     UserController.userShowBookings,
     (req, res) => {
         res.render("userProfile")
     }
-
 )
 
 export {router}

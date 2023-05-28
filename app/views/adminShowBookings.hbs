@@ -8,26 +8,13 @@
         {{!-- <li><a href="/adminShowAvailability">Availability</a></li> --}}
       </ul>
     </div>
-    
-    <div class="row mt-5">
-        <div class="col-12">
-            {{#if message}}
-                <div class="row mt-5">
-                    <div class="col-6 offset-3">
-                        <div class="alert alert-primary" role="alert">
-                            {{message}}
-                        </div>
-                    </div>
-                </div>
-            {{/if}}
-           
-        </div>  
-    </div>
+
     <div> <h3>Bookings: {{bookings.length}}</h3></div>
     
     {{#if bookings}}
         
         <div class="table-responsive-sm">
+            
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -68,6 +55,20 @@
                     <div class="col">
                         <a class="btn btn-sm btn-secondary" href="/adminAddBooking">Add Booking</a>
                     </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        {{#if message}}
+                            <div class="row mt-5">
+                                <div class="col-6 offset-3">
+                                    <div class="alert alert-primary" role="alert">
+                                        {{message}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{/if}}
+           
+                    </div>  
                 </div>
         {{!-- <h3> {{users}}</h3> --}}
         </div>

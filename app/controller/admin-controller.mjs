@@ -12,15 +12,12 @@ const findAllUsers = async (req, res, next) => {
 const adminDoAddUser = async (req, res, next) => {
     try{
         console.log(req.body)
+
         await Admin.addUser({
-            "userID": req.body["userID"],
-            "username": "theo",  //prosorino!!
-            "password": "1234asd", //prosorino!!
+            // "userID": req.body["userID"],
             "firstName": req.body["firstName"],
             "lastName": req.body["lastName"],
             "email":req.body["email"],
-            "gender": "female", //prosorino!!
-            "nationality": "Greek", //prosorino!
             "address": req.body["address"],
             "phone_number": req.body["phone_number"],
         })
@@ -48,7 +45,6 @@ const adminDeleteUser = async(req, res, next) => {
 
 const findAllBookings = async (req, res, next) => {
     const bookings = await Admin.showReservations()
-    // console.log("2",bookings)
     req.bookings = bookings
     next()
 }
@@ -60,18 +56,31 @@ const adminDoAddBooking = async (req, res, next) => {
             "check_out_date": req.body["check_out_date"],
             "total_price": req.body["total_price"],
             "guests_count": req.body["guests_count"],
+            "status": "completed",
             "paymentMethod": req.body["paymentMethod"],
             "UserUserID": req.body["userID"],
-            "RoomRoomID": req.body["RoomRoomID"]
+            "RoomRoomID":req.body["roomID"]
         })
         req.message = 'Booking Added!'
         next()
     } catch(error){
+       
+        // throw error
         req.message = 'Failed to add Booking!'
         next()
     }
 }
 
+// const adminDoAddReservationRoom = async(req,res,next) => {
+//     try{
+//         await Admin.addReservationRoom({
+//             "ReservationReservationID": req.reservation.reservationID,
+//             "RoomRoomID": ,
+//         })
+//     }catch(error){
+//         req.message = 'Failed to add booking'
+//     }
+// }
 
 const adminDeleteBooking = async (req, res, next) => {
     try {
@@ -99,4 +108,4 @@ const checkIfAuthenticatedAdmin = async(req, res, next) => { //dinoume access st
 //     const bookedRooms = await Admin.getBookedRooms()
 // }
 
-export{findAllUsers, adminDoAddUser, adminDeleteUser, findAllBookings, adminDoAddBooking, adminDeleteBooking, checkIfAuthenticatedAdmin}
+export{findAllUsers, adminDoAddUser, adminDeleteUser, findAllBookings, adminDoAddBooking,adminDeleteBooking, checkIfAuthenticatedAdmin}

@@ -204,7 +204,6 @@ function generateReservationRooms(numRooms,rooms,bookings){
     }
   }
   return bookedRooms
-  
 }
 
 //Create initial DB data
