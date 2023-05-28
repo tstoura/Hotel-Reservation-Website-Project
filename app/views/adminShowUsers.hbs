@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3 sidebar">
@@ -8,69 +7,73 @@
         <li><a href="/adminShowRooms">Rooms</a></li>
       </ul>
     </div>
-      {{#if message}}
+
+    <div class="col-md-9">
+      <div>
+        <h3>Rooms: {{rooms.length}}</h3>
+      </div>
+
+      {{#if rooms}}
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Room ID</th>
+              <th>Room's Number</th>
+              <th>Capacity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each rooms}}
+            {{!-- mono gia ta available rooms!! --}}
+            <tr>
+              <td>{{this.roomID}}</td>
+              <td>{{this.number}}</td>
+              <td>{{this.RoomTypeRoomTypeID}}</td>
+              <!--
+              <td>
+                <a class="btn btn-sm btn-secondary" href="/adminEditBooking?reservationID={{this.reservationID}}">Edit Booking</a>
+              </td>
+              <td>
+                <a class="btn btn-sm btn-secondary" href="/adminDeleteBooking?reservationID={{this.reservationID}}">Delete Booking</a>
+              </td>
+              -->
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <div class="row mt-5">
+          <div class="col-12">
+            {{#if message}}
             <div class="row mt-5">
-                <div class="col-6 offset-3">
-                    <div class="alert alert-primary" role="alert">
-                        {{message}}
-                    </div>
-                </div>
-            </div>
-        {{/if}}
-
-        <div><h3>Users Registered: {{users.length}} </h3></div>
-    
-
-
-    {{#if users}}
-        <div class="table-responsive-sm">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>User ID</th>
-                        <th>Username</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-   
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each users}} 
-                    {{!-- mono gia ta available rooms!! --}}
-                        <tr>
-                            <td>{{this.userID}}</td>
-                            <td>{{this.username}}</td>
-                            <td>{{this.firstName}}</td>
-                            <td>{{this.lastName}}</td>
-                            
-                            <td>
-                                <a class="btn btn-sm btn-secondary" href="/adminDeleteUser?userID={{this.userID}}">Delete User</a>
-                            </td>
-                        </tr>
-                    {{/each}}
-                    <div class="row mt-2">
-                        <div class="col">
-                            <a class="btn btn-sm btn-secondary" href="/adminAddUser">Add User</a>
-                        </div>
-                    </div>
-                </tbody>
-             
-            </table>
-        </div>
-    {{/if}}
-    {{#unless users}}
-        <div class="row mt-5">
-            <div class="col">No Users Found!</div>
-        </div>
-    {{/unless}}
-    {{#if error}} 
-        <div class="row mt-5">
-            <div class="col-6 offset-3">
+              <div class="col-6 offset-3">
                 <div class="alert alert-primary" role="alert">
-                    {{error}}
+                  {{message}}
                 </div>
+              </div>
             </div>
+            {{/if}}
+          </div>
         </div>
-    {{/if}}
+      </div>
+      {{/if}}
+
+      {{#unless rooms}}
+      <div class="row mt-5">
+        <div class="col">No Rooms Found!</div>
+      </div>
+      {{/unless}}
+    
+      {{#if error}}
+      <div class="row mt-5">
+        <div class="col-6 offset-3">
+          <div class="alert alert-primary" role="alert">
+            {{error}}
+          </div>
+        </div>
+      </div>
+      {{/if}}
+      
     </div>
+  </div>
 </div>
