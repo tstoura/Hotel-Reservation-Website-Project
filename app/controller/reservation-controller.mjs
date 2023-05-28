@@ -14,7 +14,7 @@ const doAddReservation = async (req,res,next)=>{
             phone_number: req.body.phone
         }
         
-        const user = await User.addUser(userData)
+        const user = await User.getUser(userData)
         const userID = user.userID
         
         console.log("user: ", user)
@@ -38,14 +38,14 @@ const doAddReservation = async (req,res,next)=>{
             UserUserID: userID
         })
 
-        const desiredData={
-            dateIn : req.body.check_in_date,
-            dateOut : req.body.check_out_date,
-            guests: req.body.guests
-        }
+        // const desiredData={
+        //     dateIn : req.body.check_in_date,
+        //     dateOut : req.body.check_out_date,
+        //     guests: req.body.guests
+        // }
 
-        const roomIDs = await Reservation.selectRooms(roomTypesID,roomsCount,desiredData)
-        await Reservation.RoomsToReservation(booking,roomIDs)
+        // const roomIDs = await Reservation.selectRooms(roomTypesID,roomsCount,desiredData)
+        // await Reservation.RoomsToReservation(booking,roomIDs)
         next()
     }
     catch (error) {
@@ -116,7 +116,33 @@ const availableRooms = async (req,res,next)=>{
     }
     
 }
+// function calculateDate(){
+//     const date = new Date()
+//     let day = date.getDate()
+//     let month = date.getMonth() + 1
+//     let year = date.getFullYear()
+//     let currentDate = `${year}-${month}-${day}`
 
+//     return currentDate
+// }
+
+// async function connectRooms(booking,req){
+//     try{
+//         const roomTypesID = req.body.roomTypesID
+//         const roomsCount = req.body.roomsCount
+
+//         const desiredData={
+//             dateIn : req.body.check_in_date,
+//             dateOut : req.body.check_out_date,
+//             guests: req.body.guests
+//         }
+
+//         const roomIDs = await Reservation.selectRooms(roomTypesID,roomsCount,desiredData)
+//         await Reservation.RoomsToReservation(booking,roomIDs)
+//     }catch (error) {
+//         next(error) 
+//     }
+// }
 
 
 export {doAddReservation, availableRooms}

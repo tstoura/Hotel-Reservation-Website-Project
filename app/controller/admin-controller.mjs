@@ -71,16 +71,33 @@ const adminDoAddBooking = async (req, res, next) => {
     }
 }
 
-// const adminDoAddReservationRoom = async(req,res,next) => {
-//     try{
-//         await Admin.addReservationRoom({
-//             "ReservationReservationID": req.reservation.reservationID,
-//             "RoomRoomID": ,
-//         })
-//     }catch(error){
-//         req.message = 'Failed to add booking'
-//     }
-// }
+const getBookingInfo = async (req, res, next) => {
+    try{
+        const reservationID = req.query.reservationID //pernoume to reservationID sto opoio 
+        //o admin thelei na kanei kapoio edit 
+        const bookingInfo = await Admin.findReservation(reservationID) //dinoume to reservationID gia na vroume 
+        //ta upoloipa stoixeia tis kratisis kai to roomID sto opoio anaferetai 
+        console.log("Booking Info after findReservation:", bookingInfo)
+
+        const resInfo = {
+            reservationID: bookingInfo.resInfo.reservationID,
+            check_in_date: bookingInfo.resInfo.check_in_date,
+            check_out_date: bookingInfo.resInfo.check_out_date,
+            total_price: bookingInfo.resInfo.total_price,
+            guests_count: bookingInfo.resInfo.guests_count,
+            paymentMethod: bookingInfo.resInfo.paymentMethod,
+            userID: bookingInfo.resInfo.UserUserID,
+            roomID: bookingInfo.roomID
+        }
+        console.log("resInfo:",resInfo)
+        req.bookingInfo = resInfo
+        // return req.bookingInfo
+        next()
+    }catch(error){
+        // req.message = 'Error'
+        next(error)
+    }
+}
 
 const adminDeleteBooking = async (req, res, next) => {
     try {
@@ -94,9 +111,34 @@ const adminDeleteBooking = async (req, res, next) => {
     }
   };
   
+const adminDoEditBooking = async (req, res, next) =>{
+    try {
+        // console.log(req.query.reservationID)
+     
+        await Admin.updateReservation({
+            "reservationID": req.query.reservationID,
+            "check_in_date": req.body["check_in_date"],
+            "check_out_date": req.body["check_out_date"],
+            "total_price": req.body["total_price"],
+            "guests_count": req.body["guests_count"],
+            "paymentMethod": req.body["paymentMethod"],
+            "UserUserID": req.body["userID"],
+            "RoomRoomID":req.body["roomID"]
+        })
+    
+        req.message = 'Booking Updated!'
+        next()
+    } catch(error){
+       
+        // throw error
+        req.message = 'Failed to update Booking!'
+        next()
+    }
+}
 
 const checkIfAuthenticatedAdmin = async(req, res, next) => { //dinoume access ston admin gia tis selides tou
-    if(req.session.username === 'admin'){
+    
+    if(req.session.username == 'admin'){
         next()
     }
     else{
@@ -104,8 +146,24 @@ const checkIfAuthenticatedAdmin = async(req, res, next) => { //dinoume access st
     }
 }
 
-// async function bookedRooms(){
-//     const bookedRooms = await Admin.getBookedRooms()
-// }
+//Rooms 
 
-export{findAllUsers, adminDoAddUser, adminDeleteUser, findAllBookings, adminDoAddBooking,adminDeleteBooking, checkIfAuthenticatedAdmin}
+const findAllRooms = async(req, res, next) => {
+    const rooms = await Admin.showRooms()
+    req.rooms = rooms
+    next()
+}
+
+async function getStatistics(req,res,next){
+    try{
+        const bookedRooms  = await Admin.getRooms() 
+
+        // console.log("bookedRooms: ", bookedRooms)
+        res.render("admin",{rooms:JSON.stringify(bookedRooms)})
+
+    }catch(error){        
+        next()
+    }
+}
+
+export{findAllUsers, adminDoAddUser, adminDeleteUser, findAllBookings, adminDoAddBooking, getBookingInfo, adminDeleteBooking, adminDoEditBooking, checkIfAuthenticatedAdmin, findAllRooms, getStatistics}

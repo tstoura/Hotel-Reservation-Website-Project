@@ -8,56 +8,42 @@
         <li><a href="/adminShowRooms">Rooms</a></li>
       </ul>
     </div>
+
+    <div> <h3>Rooms: {{rooms.length}}</h3></div>
     
-    <div> <h3>Bookings: {{bookings.length}}</h3></div>
-    
-    {{#if bookings}}
+    {{#if rooms}}
         
         <div class="table-responsive-sm">
             
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Reservation ID</th>
-                        <th>Reservation's Status</th>
-                        <th>User ID</th>
-                        <th>Room Number</th>
-                        <th>Check-In Date</th>
-                        <th>Check-Out Date</th>
+                        <th>Room ID</th>
+                        <th>Room's Number</th>
+                        <th>Capacity</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each bookings}} 
+                    {{#each rooms}} 
                     {{!-- mono gia ta available rooms!! --}}
                         <tr>
-                            <td>{{this.reservationID}}</td>
-                            <td>{{this.status}}</td>
-                            <td>{{this.UserUserID}}</td>
-                            <td>{{this.Rooms_number}}</td>
-                            <td>{{this.check_in_date}}</td>
-                            <td>{{this.check_out_date}}</td>
-
+                            <td>{{this.roomID}}</td>
+                            <td>{{this.number}}</td>
+                            <td>{{this.RoomTypeRoomTypeID}}</td>
+{{!--                             
+                            
                             <td>
                                 <a class="btn btn-sm btn-secondary" href="/adminEditBooking?reservationID={{this.reservationID}}">Edit Booking</a>
                             </td>
                             <td>
                                 <a class="btn btn-sm btn-secondary" href="/adminDeleteBooking?reservationID={{this.reservationID}}">Delete Booking</a>
-                            </td>
+                            </td> --}}
 
                         </tr>
                     {{/each}}
                 </tbody>
-                {{!-- <div class="row mt-2">
-                    <div class="col">
-                        <a class="btn btn-sm btn-secondary" href="/adminAddBooking">Add Booking</a>
-                    </div>
-                </div> --}}
+
             </table>
-                <div class="row mt-2">
-                    <div class="col">
-                        <a class="btn btn-sm btn-secondary" href="/adminAddBooking">Add Booking</a>
-                    </div>
-                </div>
                 <div class="row mt-5">
                     <div class="col-12">
                         {{#if message}}
@@ -72,16 +58,15 @@
            
                     </div>  
                 </div>
-        {{!-- <h3> {{users}}</h3> --}}
         </div>
     {{/if}}
-    {{#unless bookings}}
+    {{#unless rooms}}
         <div class="row mt-5">
-            <div class="col">No Bookings Found!</div>
+            <div class="col">No Rooms Found!</div>
         </div>
     
     {{/unless}}
-    {{#if error}} 
+    {{!-- {{#if error}} 
         <div class="row mt-5">
             <div class="col-6 offset-3">
                 <div class="alert alert-primary" role="alert">
@@ -89,7 +74,7 @@
                 </div>
             </div>
         </div>
-    {{/if}}
+    {{/if}} --}}
   </div>
 </div>
 

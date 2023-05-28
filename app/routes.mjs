@@ -96,7 +96,6 @@ ResController.availableRooms)
 router.get("/doBookRoom",
     UserController.checkIfAuthenticated,
     (req, res) => {
-    console.log("req.query: ",req.query)
     const roomTypeID = req.query.roomTypeID
     const checkInDate = req.query.check_in_date
     const checkOutDate = req.query.check_out_date
@@ -138,7 +137,18 @@ router.get("/doBookRoom",
 router.post("/doCompleteBooking", 
     UserController.checkIfAuthenticated,
     ResController.doAddReservation,(req,res)=>{
-    res.render("completeBooking")
+    res.render("completeBooking", {message: "Your reservation successfully completed. Thanks for your preference!"})
+})
+
+
+router.get("/cancel",
+    UserController.checkIfAuthenticated,
+    UserController.cancelReservation,
+    UserController.removeRooms,
+    UserController.userGetInfo,
+    UserController.userShowBookings,
+        (req,res, next) => {
+        const bookingID = req.query.bookingID
 })
 
 //----------Admin----------//
@@ -146,9 +156,23 @@ router.post("/doCompleteBooking",
 
 router.get("/admin", 
     UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,
+    AdminController.getStatistics
+)
+
+router.get("/profile",
+    UserController.checkIfAuthenticated,
+    (req,res, next) => {
+        if(req.session.username == "admin"){
+            res.redirect("/admin")
+        }
+    next()},
+    UserController.userGetInfo,
+    UserController.userShowBookings,
     (req, res) => {
-    res.render("admin")
-})
+        res.render("userProfile")
+    }
+)
 
 router.get("/adminShowUsers", 
     UserController.checkIfAuthenticated,
@@ -181,7 +205,7 @@ router.get("/adminDeleteUser",
     AdminController.adminDeleteUser,
     AdminController.findAllUsers, 
     (req,res) => {
-    res.render("adminShowUsers", {users: req.users})
+    res.render("adminShowUsers", { users: req.users })
 })
 
 //show, add & delete bookings
@@ -190,7 +214,7 @@ router.get("/adminShowBookings",
     AdminController.checkIfAuthenticatedAdmin,
     AdminController.findAllBookings, 
     (req,res) => {
-    res.render("adminShowBookings", {bookings: req.bookings})
+    res.render("adminShowBookings", { bookings: req.bookings })
 })
 
 router.get("/adminAddBooking", (req, res) => {
@@ -218,18 +242,36 @@ router.get("/adminDeleteBooking",
     res.render("adminShowBookings", { bookings: req.bookings })
 })
 
-router.get("/profile",
+router.get("/adminEditBooking",
     UserController.checkIfAuthenticated,
-    (req,res, next) => {
-        if(req.session.username === "admin"){
-            res.render("admin")
-        }
-    next()},
-    UserController.userGetInfo,
-    UserController.userShowBookings,
+    AdminController.checkIfAuthenticatedAdmin,
+    AdminController.getBookingInfo,
     (req, res) => {
-        res.render("userProfile")
+        res.render("adminEditBooking", { bookingInfo: req.bookingInfo })
     }
 )
+
+router.post("/adminDoEditBooking",
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,
+    AdminController.adminDoEditBooking,
+    AdminController.findAllBookings,
+    (req, res) => {
+        res.render("adminShowBookings", { bookings: req.bookings })
+    }
+)
+
+
+router.get("/adminShowRooms",
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAuthenticatedAdmin,
+    AdminController.findAllRooms,
+    (req, res) => {
+        res.render("adminShowRooms", { rooms: req.rooms })
+    }
+)
+
+
+
 
 export {router}

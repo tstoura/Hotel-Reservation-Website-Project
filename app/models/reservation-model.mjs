@@ -7,7 +7,6 @@ async function addReservation(newReservation){
     console.log(newReservation.check_in_date)
     try{
         const createdReservation  = await Reservation.create(newReservation)
-        console.log("Reservation created:", createdReservation.toJSON())
         return createdReservation
     }catch (error) {
         throw error
@@ -320,7 +319,7 @@ async function selectRooms(roomTypesID,roomsCount,data){
       triple: tripleRooms,
       deluxe: deluxeRooms
     }
-    console.log("availableRooms: ",availableRooms)
+    // console.log("availableRooms: ",availableRooms)
 
     const roomIDs=[]
      
@@ -331,7 +330,7 @@ async function selectRooms(roomTypesID,roomsCount,data){
         }
       }
     }
-    console.log("RoomIDs: ",roomIDs)
+    // console.log("RoomIDs: ",roomIDs)
     
     return roomIDs  
     
@@ -353,7 +352,7 @@ async function RoomsToReservation(booking,roomIDs){
     }
     
     const connect = await ReservationRoom.create(bookedRoom)
-    console.log("Created:", connect.toJSON())
+    // console.log("Created:", connect.toJSON())
   }
 }
 

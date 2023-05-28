@@ -1,0 +1,11 @@
+.canceled{
+    color:red;
+    opacity: 0.4;
+}
+
+.sideInfo{
+    background-color: rgb(84, 84, 84);
+    color: white;
+    min-height: 75%;
+    /* min-height: 85%; */
+}
