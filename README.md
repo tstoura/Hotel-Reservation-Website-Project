@@ -15,7 +15,7 @@ You must install the required node-modules with the following command:
 ```
 $ npm install
 ```
-Also, _pgAdmin_ and _PostgresSQL_ are nessecary for the database.
+Also, _pgAdmin_ and _PostgresSQL_ are neseccary for the database.
 
 ## Getting Started
 
